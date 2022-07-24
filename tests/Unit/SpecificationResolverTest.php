@@ -19,7 +19,7 @@ class SpecificationResolverTest extends TestCase
                 0 => [
                     'type' => 'n',
                     'length' => 4,
-                    'encode' => 'bcd'
+                    'encode' => 'bcd',
                 ],
             ],
         ];

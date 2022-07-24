@@ -5,7 +5,7 @@ namespace Lauana\Iso\Constants;
 use Lauana\Iso\Lengths\FixedLength;
 use Lauana\Iso\Lengths\LlvarLength;
 
-class Length
+class Lengths
 {
     public const TYPE_FIXED = 0;
     public const TYPE_LLVAR = 2;
