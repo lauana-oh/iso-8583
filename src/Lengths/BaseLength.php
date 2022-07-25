@@ -2,14 +2,19 @@
 
 namespace Lauana\Iso\Lengths;
 
-abstract class BaseLength
+use Lauana\Iso\Contracts\PipeContract;
+use Lauana\Iso\Traits\HasEncoder;
+
+abstract class BaseLength implements PipeContract
 {
-    protected string $encode;
+    use HasEncoder;
+
     protected int $size;
 
-    public function __construct(string $encode, int $size)
+    public function setSize(int $size): self
     {
-        $this->encode = $encode;
         $this->size = $size;
+
+        return $this;
     }
 }

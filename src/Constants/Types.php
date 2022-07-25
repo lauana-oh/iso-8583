@@ -2,29 +2,13 @@
 
 namespace Lauana\Iso\Constants;
 
-use Lauana\Iso\Contracts\TypeContract;
-use Lauana\Iso\Types\Numeric;
-
 class Types
 {
+    public const TYPE_ALPHA = 'a';
+    public const TYPE_ALPHANUMERIC = 'an';
+    public const TYPE_ALPHANUMERIC_SPECIAL_CHAR = 'ans';
+    public const TYPE_BINARY = 'b';
     public const TYPE_NUMERIC = 'n';
-
-    public const SUPPORTED_TYPES = [
-        self::TYPE_NUMERIC,
-    ];
-
-    protected const TYPES_CLASSES = [
-        self::TYPE_NUMERIC => Numeric::class,
-    ];
-
-    public static function getTypeNewClass(string $type): TypeContract
-    {
-        $class = self::TYPES_CLASSES[$type] ?? null;
-
-        if (! $class) {
-            throw new \Exception();
-        }
-
-        return new $class;
-    }
+    public const TYPE_NUMERIC_SPECIAL_CHAR = 'ns';
+    public const TYPE_SPECIAL_CHAR = 's';
 }

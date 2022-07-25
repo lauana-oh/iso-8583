@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 class SpecificationResolverTest extends TestCase
 {
     protected array $settings;
+    protected SpecificationResolver $resolver;
 
     protected function setUp(): void
     {
@@ -19,15 +20,17 @@ class SpecificationResolverTest extends TestCase
                 0 => [
                     'type' => 'n',
                     'length' => 4,
-                    'encode' => 'bcd',
+                    'encode' => ['bcd'],
                 ],
             ],
         ];
+
+        $this->resolver = new SpecificationResolver();
     }
 
     public function testItCanResolveOverrideDefaultValue()
     {
-        self::assertFalse(SpecificationResolver::resolveSettings($this->settings)['override']);
+        self::assertFalse($this->resolver->resolveSettings($this->settings)['override']);
     }
 
     public function testItValidatesOverrideIsBoolean()
@@ -37,12 +40,12 @@ class SpecificationResolverTest extends TestCase
 
         $this->settings['override'] = 'bla';
 
-        SpecificationResolver::resolveSettings($this->settings);
+        $this->resolver->resolveSettings($this->settings);
     }
 
     public function testItCanResolveFieldWithFixedLength()
     {
-        $field = SpecificationResolver::resolveSettings($this->settings)['fields'][0];
+        $field = $this->resolver->resolveSettings($this->settings)['fields'][0];
 
         self::assertEquals(['value' => 'n', 'length' => 0], $field['type']);
         self::assertEquals(4, $field['length']);
@@ -52,9 +55,9 @@ class SpecificationResolverTest extends TestCase
     public function testItCanResolveFieldWithVariableLength()
     {
         $this->settings['fields'][0]['type'] = 'n..';
-        $this->settings['fields'][0]['encode'] = 'bcd, bcd';
+        $this->settings['fields'][0]['encode'] = ['bcd', 'bcd'];
 
-        $field = SpecificationResolver::resolveSettings($this->settings)['fields'][0];
+        $field = $this->resolver->resolveSettings($this->settings)['fields'][0];
 
         self::assertEquals(['value' => 'n', 'length' => 2], $field['type']);
         self::assertEquals(4, $field['length']);

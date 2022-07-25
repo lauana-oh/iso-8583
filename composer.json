@@ -9,16 +9,23 @@
     "autoload": {
         "psr-4": {
             "Lauana\\Iso\\": "src/"
-        }
+        },
+        "files": [
+            "src/Support/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "src/Support/helpers.php"
+        ]
     },
     "require": {
         "php": "^7.4 | ^8.0",
-        "symfony/options-resolver": "^5.4"
+        "symfony/options-resolver": "^5.4",
+        "pimple/pimple": "^3.5"
     },
     "require-dev": {
         "symfony/var-dumper": "^5.4",
