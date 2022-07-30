@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Pack;
 
-use LauanaOh\Iso8583\Exceptions\InvalidValueException;
+use LauanaOh\Iso8583\Exceptions\EncodeException;
 use Tests\Concerns\HasFieldsDataProvider;
 use Tests\TestCase;
 
@@ -166,7 +166,7 @@ class EncodeTest extends TestCase
 
         $this->fieldsData[2] = 'abc12*';
 
-        $this->expectException(InvalidValueException::class);
+        $this->expectException(EncodeException::class);
         $this->expectExceptionMessage('[Field 2]: value "abc12*" is not valid type "'.$type.'".');
 
         iso8583_encode($this->fieldsData, $specification);
@@ -187,7 +187,7 @@ class EncodeTest extends TestCase
 
         $this->fieldsData[2] = '12345678';
 
-        $this->expectException(InvalidValueException::class);
+        $this->expectException(EncodeException::class);
         $this->expectExceptionMessage(sprintf($message, 2, $this->fieldsData[2]));
 
         iso8583_encode($this->fieldsData, $specification);
@@ -208,7 +208,7 @@ class EncodeTest extends TestCase
 
         $this->fieldsData[2] = '12345678';
 
-        $this->expectException(InvalidValueException::class);
+        $this->expectException(EncodeException::class);
         $this->expectExceptionMessage(sprintf($message, 2, $this->fieldsData[2]));
 
         iso8583_encode($this->fieldsData, $specification);

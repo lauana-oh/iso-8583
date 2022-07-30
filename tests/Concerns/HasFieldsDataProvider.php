@@ -16,6 +16,9 @@ trait HasFieldsDataProvider
             Types::TYPE_ALPHANUMERIC => [
                 Types::TYPE_ALPHANUMERIC,
             ],
+            Types::TYPE_BINARY => [
+                Types::TYPE_BINARY,
+            ],
             Types::TYPE_NUMERIC => [
                 Types::TYPE_NUMERIC,
             ],

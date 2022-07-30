@@ -6,6 +6,8 @@ use Closure;
 use LauanaOh\Iso8583\Contracts\FieldContract;
 use LauanaOh\Iso8583\Contracts\PaddingContract;
 use LauanaOh\Iso8583\Contracts\PipeContract;
+use LauanaOh\Iso8583\Exceptions\DecodeException;
+use LauanaOh\Iso8583\Exceptions\EncodeException;
 use LauanaOh\Iso8583\Exceptions\InvalidValueException;
 use LauanaOh\Iso8583\Support\Pipeline;
 use Throwable;
@@ -35,7 +37,7 @@ class Field implements FieldContract
                 ->pack()
                 ->andReturnMessage();
         } catch (Throwable $exception) {
-            throw InvalidValueException::invalidField($this->type, $this->getKey(), $exception);
+            throw EncodeException::invalidField($this->type, $this->getKey(), $exception);
         }
 
         return $next($data, $message);
@@ -52,7 +54,7 @@ class Field implements FieldContract
 
             $data->setField($fieldData->getField('key'), $fieldData->getField('value'));
         } catch (Throwable $exception) {
-            throw InvalidValueException::invalidField($this->type, $this->getKey(), $exception);
+            throw DecodeException::invalidField($this->type, $this->getKey(), $exception);
         }
 
         return $next($data, $message);

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Unpack;
 
+use LauanaOh\Iso8583\Exceptions\DecodeException;
 use LauanaOh\Iso8583\Exceptions\InvalidValueException;
 use Tests\Concerns\HasFieldsDataProvider;
 use Tests\TestCase;
@@ -157,7 +158,7 @@ class DecodeTest extends TestCase
             ],
         ];
 
-        $this->expectException(InvalidValueException::class);
+        $this->expectException(\LauanaOh\Iso8583\Exceptions\DecodeException::class);
         $this->expectExceptionMessage('[Field 2]: value "abc12*" is not valid type "'.$type.'".');
 
         iso8583_decode($byteMessage, $specification);
@@ -179,9 +180,19 @@ class DecodeTest extends TestCase
             ],
         ];
 
-        $this->expectException(InvalidValueException::class);
+        $this->expectException(DecodeException::class);
         $this->expectExceptionMessage(sprintf($message, 2, $this->fieldsData[2]));
 
         iso8583_decode($byteMessage, $specification);
+    }
+
+    public function testItCanNotDecodeDueMessageStreamExausted()
+    {
+        $byteMessage = '3032303070200000020000023136343131303736303030303030303030383030303';
+
+        $this->expectException(DecodeException::class);
+        $this->expectExceptionMessage('[Field 55]: The message stream is exhaust');
+
+        iso8583_decode($byteMessage);
     }
 }

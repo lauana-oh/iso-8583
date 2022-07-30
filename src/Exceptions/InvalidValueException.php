@@ -18,9 +18,4 @@ class InvalidValueException extends Iso8583Exception
     {
         return new self(sprintf(': value "%s" length must not be greater than %d.', $value, $length));
     }
-
-    public static function invalidField(string $type, string $field, \Throwable $e): self
-    {
-        return new self(sprintf('[%s %s]%s', ucfirst($type), $field, $e->getMessage()), $e->getCode(), $e);
-    }
 }

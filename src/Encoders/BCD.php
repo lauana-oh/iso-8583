@@ -26,11 +26,6 @@ class BCD implements EncoderContract
         return $padding->trim($data);
     }
 
-    public function getSize(int $length): int
-    {
-        return $length;
-    }
-
     public function getDigits(int $length): int
     {
         return $length % 2 === 0 ? $length : ++$length;

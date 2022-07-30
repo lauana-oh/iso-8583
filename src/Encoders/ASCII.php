@@ -17,11 +17,6 @@ class ASCII implements EncoderContract
         return hex2bin($data);
     }
 
-    public function getSize(int $length): int
-    {
-        return $length / 2;
-    }
-
     public function getDigits(int $length): int
     {
         return $length * 2;

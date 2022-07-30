@@ -18,7 +18,7 @@ class ByteStream implements Stringable
     {
         if ($this->currentBytes === '' || strlen($this->currentBytes) < $length) {
             throw new ByteStreamExhaustException(
-                'The message stream is exhaust'
+                ': The message stream is exhaust'
             );
         }
 
