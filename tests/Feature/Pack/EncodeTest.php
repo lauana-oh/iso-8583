@@ -171,4 +171,46 @@ class EncodeTest extends TestCase
 
         iso8583_encode($this->fieldsData, $specification);
     }
+
+    /**
+     * @dataProvider invalidFixedLength
+     */
+    public function testItCanNotEncodeDueInvalidFixedLength(string $type, int $length, string $message)
+    {
+        $specification['fields'] = [
+            2 => [
+                'type' => 'n'.$type,
+                'encode' => 'bcd',
+                'length' => $length,
+            ],
+        ];
+
+        $this->fieldsData[2] = '12345678';
+
+        $this->expectException(InvalidValueException::class);
+        $this->expectExceptionMessage(sprintf($message, 2, $this->fieldsData[2]));
+
+        iso8583_encode($this->fieldsData, $specification);
+    }
+
+    /**
+     * @dataProvider invalidVariableLength
+     */
+    public function testItCanNotEncodeDueInvalidVariableLength(string $type, int $length, string $message)
+    {
+        $specification['fields'] = [
+            2 => [
+                'type' => 'n'.$type,
+                'encode' => 'bcd',
+                'length' => $length,
+            ],
+        ];
+
+        $this->fieldsData[2] = '12345678';
+
+        $this->expectException(InvalidValueException::class);
+        $this->expectExceptionMessage(sprintf($message, 2, $this->fieldsData[2]));
+
+        iso8583_encode($this->fieldsData, $specification);
+    }
 }

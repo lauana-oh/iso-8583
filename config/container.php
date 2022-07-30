@@ -23,8 +23,8 @@ use LauanaOh\Iso8583\Entities\Field;
 use LauanaOh\Iso8583\Entities\Padding;
 use LauanaOh\Iso8583\Iso8583Message;
 use LauanaOh\Iso8583\Lengths\Fixed;
-use LauanaOh\Iso8583\Lengths\Lllvar;
-use LauanaOh\Iso8583\Lengths\Llvar;
+use LauanaOh\Iso8583\Lengths\LLLVAR;
+use LauanaOh\Iso8583\Lengths\LLVAR;
 use LauanaOh\Iso8583\Support\SpecificationResolver;
 use LauanaOh\Iso8583\Tags\Invisible;
 use LauanaOh\Iso8583\Types\Alpha;
@@ -92,8 +92,8 @@ $container['type_'.Types::TYPE_SPECIAL_CHAR] = $container->factory(fn () => new 
 */
 
 $container['length_'.strlen(Lengths::TYPE_FIXED)] = $container->factory(fn () => new Fixed());
-$container['length_'.strlen(Lengths::TYPE_LLVAR)] = $container->factory(fn () => new Llvar());
-$container['length_'.strlen(Lengths::TYPE_LLLVAR)] = $container->factory(fn () => new Lllvar());
+$container['length_'.strlen(Lengths::TYPE_LLVAR)] = $container->factory(fn () => new LLVAR());
+$container['length_'.strlen(Lengths::TYPE_LLLVAR)] = $container->factory(fn () => new LLLVAR());
 
 /*
 |--------------------------------------------------------------------------

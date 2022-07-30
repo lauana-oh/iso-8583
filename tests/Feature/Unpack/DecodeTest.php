@@ -162,4 +162,26 @@ class DecodeTest extends TestCase
 
         iso8583_decode($byteMessage, $specification);
     }
+
+    /**
+     * @dataProvider invalidVariableLength
+     */
+    public function testItCanNotDecodeDueInvalidVariableLength(string $type, int $size, string $message)
+    {
+        $length = str_pad('16', strlen($type) % 2 == 0 ? strlen($type) : strlen($type) + 1, '0', STR_PAD_LEFT);
+        $byteMessage = '02007020000002000000'.$length.'41107600000000080000000000000068000001233030';
+
+        $specification['fields'] = [
+            2 => [
+                'type' => 'n'.$type,
+                'encode' => 'bcd',
+                'length' => $size,
+            ],
+        ];
+
+        $this->expectException(InvalidValueException::class);
+        $this->expectExceptionMessage(sprintf($message, 2, $this->fieldsData[2]));
+
+        iso8583_decode($byteMessage, $specification);
+    }
 }

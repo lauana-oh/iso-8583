@@ -5,12 +5,15 @@ namespace LauanaOh\Iso8583\Lengths;
 use Closure;
 use LauanaOh\Iso8583\Entities\ByteStream;
 use LauanaOh\Iso8583\Entities\DataHolder;
+use LauanaOh\Iso8583\Exceptions\InvalidValueException;
 
-class Lllvar extends BaseLength
+class LLVAR extends BaseLength
 {
+    protected const LENGTH = 2;
+
     public function pack(DataHolder $data, ByteStream $message, Closure $next)
     {
-        $length = str_pad(strlen($data->getField('value')), 3, '0', STR_PAD_LEFT);
+        $length = str_pad(strlen($data->getField('value')), static::LENGTH, '0', STR_PAD_LEFT);
         $message->concat($this->encoder->encode($length));
 
         return $next($data, $message);
@@ -18,14 +21,20 @@ class Lllvar extends BaseLength
 
     public function unpack(DataHolder $data, ByteStream $message, Closure $next)
     {
-        $length = $this->encoder->decode($message->getAndMoveCursor($this->encoder->getDigits(3)));
-        $data->setField('length', $length);
+        $data->setField('length', $this->encoder->decode($message->getAndMoveCursor($this->encoder->getDigits(static::LENGTH))));
 
         return $next($data, $message);
     }
 
     public function validate(DataHolder $data, ByteStream $message, Closure $next)
     {
+        $padding = $data->getField('padding');
+        $value = $padding->pad($data->getField('value'));
+
+        if (strlen($value) > $this->size) {
+            throw InvalidValueException::invalidVariableLength($value, $this->size);
+        }
+
         return $next($data, $message);
     }
 }
