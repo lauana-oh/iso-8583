@@ -1,6 +1,7 @@
 {
     "name": "lauana-oh/iso-8583",
     "description": "A versatile ISO 8583 packer",
+    "license": "mit",
     "authors": [
         {
             "name": "Lauana Oliveira Hubler",
