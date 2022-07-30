@@ -1,12 +1,12 @@
 <?php
 
-namespace Lauana\Iso\Entities;
+namespace LauanaOh\Iso8583\Entities;
 
 use Closure;
-use Lauana\Iso\Contracts\FieldContract;
-use Lauana\Iso\Contracts\PaddingContract;
-use Lauana\Iso\Contracts\PipeContract;
-use Lauana\Iso\Support\Pipeline;
+use LauanaOh\Iso8583\Contracts\FieldContract;
+use LauanaOh\Iso8583\Contracts\PaddingContract;
+use LauanaOh\Iso8583\Contracts\PipeContract;
+use LauanaOh\Iso8583\Support\Pipeline;
 
 class Field implements FieldContract
 {

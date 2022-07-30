@@ -1,11 +1,11 @@
 <?php
 
-namespace Lauana\Iso\Types;
+namespace LauanaOh\Iso8583\Types;
 
-use Lauana\Iso\Contracts\PipeContract;
-use Lauana\Iso\Entities\ByteStream;
-use Lauana\Iso\Entities\DataHolder;
-use Lauana\Iso\Traits\HasEncoder;
+use LauanaOh\Iso8583\Contracts\PipeContract;
+use LauanaOh\Iso8583\Entities\ByteStream;
+use LauanaOh\Iso8583\Entities\DataHolder;
+use LauanaOh\Iso8583\Traits\HasEncoder;
 
 abstract class BaseType implements PipeContract
 {

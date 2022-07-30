@@ -1,6 +1,6 @@
 <?php
 
-namespace Lauana\Iso\Types;
+namespace LauanaOh\Iso8583\Types;
 
 class AlphaSpecialCharacter extends BaseType
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Lauana\Iso\Contracts;
+namespace LauanaOh\Iso8583\Contracts;
 
 interface FieldContract extends PipeContract
 {

@@ -1,16 +1,16 @@
 <?php
 
-namespace Lauana\Iso\Helpers;
+namespace LauanaOh\Iso8583\Helpers;
 
-use Lauana\Iso\Contracts\BitmapContract;
-use Lauana\Iso\Contracts\EncoderContract;
-use Lauana\Iso\Contracts\FieldContract;
-use Lauana\Iso\Contracts\Iso8583MessageContract;
-use Lauana\Iso\Contracts\PaddingContract;
-use Lauana\Iso\Contracts\SpecificationResolverContract;
-use Lauana\Iso\Lengths\BaseLength;
-use Lauana\Iso\Tags\BaseTag;
-use Lauana\Iso\Types\BaseType;
+use LauanaOh\Iso8583\Contracts\BitmapContract;
+use LauanaOh\Iso8583\Contracts\EncoderContract;
+use LauanaOh\Iso8583\Contracts\FieldContract;
+use LauanaOh\Iso8583\Contracts\Iso8583MessageContract;
+use LauanaOh\Iso8583\Contracts\PaddingContract;
+use LauanaOh\Iso8583\Contracts\SpecificationResolverContract;
+use LauanaOh\Iso8583\Lengths\BaseLength;
+use LauanaOh\Iso8583\Tags\BaseTag;
+use LauanaOh\Iso8583\Types\BaseType;
 
 class ContainerHelper
 {

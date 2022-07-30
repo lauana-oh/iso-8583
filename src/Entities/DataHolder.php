@@ -1,6 +1,6 @@
 <?php
 
-namespace Lauana\Iso\Entities;
+namespace LauanaOh\Iso8583\Entities;
 
 class DataHolder
 {

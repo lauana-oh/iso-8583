@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Lauana\Iso\Support\SpecificationResolver;
+use LauanaOh\Iso8583\Support\SpecificationResolver;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 

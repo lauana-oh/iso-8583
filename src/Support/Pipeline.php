@@ -1,11 +1,11 @@
 <?php
 
-namespace Lauana\Iso\Support;
+namespace LauanaOh\Iso8583\Support;
 
 use Closure;
-use Lauana\Iso\Contracts\PipeContract;
-use Lauana\Iso\Entities\ByteStream;
-use Lauana\Iso\Entities\DataHolder;
+use LauanaOh\Iso8583\Contracts\PipeContract;
+use LauanaOh\Iso8583\Entities\ByteStream;
+use LauanaOh\Iso8583\Entities\DataHolder;
 
 class Pipeline
 {

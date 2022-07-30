@@ -1,10 +1,10 @@
 <?php
 
-namespace Lauana\Iso\Tags;
+namespace LauanaOh\Iso8583\Tags;
 
-use Lauana\Iso\Entities\ByteStream;
-use Lauana\Iso\Entities\DataHolder;
-use Lauana\Iso\Traits\HasEncoder;
+use LauanaOh\Iso8583\Entities\ByteStream;
+use LauanaOh\Iso8583\Entities\DataHolder;
+use LauanaOh\Iso8583\Traits\HasEncoder;
 
 class Visible extends BaseTag
 {

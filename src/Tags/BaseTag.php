@@ -1,8 +1,8 @@
 <?php
 
-namespace Lauana\Iso\Tags;
+namespace LauanaOh\Iso8583\Tags;
 
-use Lauana\Iso\Contracts\PipeContract;
+use LauanaOh\Iso8583\Contracts\PipeContract;
 
 abstract class BaseTag implements PipeContract
 {

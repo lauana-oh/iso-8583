@@ -1,9 +1,9 @@
 <?php
 
-namespace Lauana\Iso\Entities;
+namespace LauanaOh\Iso8583\Entities;
 
-use Lauana\Iso\Contracts\PipeContract;
-use Lauana\Iso\Helpers\ContainerHelper;
+use LauanaOh\Iso8583\Contracts\PipeContract;
+use LauanaOh\Iso8583\Helpers\ContainerHelper;
 
 class Specification
 {

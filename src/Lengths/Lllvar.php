@@ -1,9 +1,9 @@
 <?php
 
-namespace Lauana\Iso\Lengths;
+namespace LauanaOh\Iso8583\Lengths;
 
-use Lauana\Iso\Entities\ByteStream;
-use Lauana\Iso\Entities\DataHolder;
+use LauanaOh\Iso8583\Entities\ByteStream;
+use LauanaOh\Iso8583\Entities\DataHolder;
 
 class Lllvar extends BaseLength
 {

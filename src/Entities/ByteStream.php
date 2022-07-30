@@ -1,8 +1,8 @@
 <?php
 
-namespace Lauana\Iso\Entities;
+namespace LauanaOh\Iso8583\Entities;
 
-use Lauana\Iso\Exceptions\ByteStreamExhaustException;
+use LauanaOh\Iso8583\Exceptions\ByteStreamExhaustException;
 use Stringable;
 
 class ByteStream implements Stringable

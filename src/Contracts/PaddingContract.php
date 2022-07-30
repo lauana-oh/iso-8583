@@ -1,8 +1,8 @@
 <?php
 
-namespace Lauana\Iso\Contracts;
+namespace LauanaOh\Iso8583\Contracts;
 
-use Lauana\Iso\Entities\Padding;
+use LauanaOh\Iso8583\Entities\Padding;
 
 interface PaddingContract
 {

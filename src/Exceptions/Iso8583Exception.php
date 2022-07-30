@@ -1,6 +1,6 @@
 <?php
 
-namespace Lauana\Iso\Exceptions;
+namespace LauanaOh\Iso8583\Exceptions;
 
 use Exception;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Lauana\Iso\Lengths;
+namespace LauanaOh\Iso8583\Lengths;
 
-use Lauana\Iso\Contracts\PipeContract;
-use Lauana\Iso\Traits\HasEncoder;
+use LauanaOh\Iso8583\Contracts\PipeContract;
+use LauanaOh\Iso8583\Traits\HasEncoder;
 
 abstract class BaseLength implements PipeContract
 {

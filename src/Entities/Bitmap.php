@@ -1,8 +1,8 @@
 <?php
 
-namespace Lauana\Iso\Entities;
+namespace LauanaOh\Iso8583\Entities;
 
-use Lauana\Iso\Contracts\BitmapContract;
+use LauanaOh\Iso8583\Contracts\BitmapContract;
 
 class Bitmap implements BitmapContract
 {

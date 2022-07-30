@@ -1,5 +1,5 @@
 {
-    "name": "lauana/8583-iso",
+    "name": "lauana-oh/iso-8583",
     "authors": [
         {
             "name": "Lauana Oliveira Hubler",
@@ -8,7 +8,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Lauana\\Iso\\": "src/"
+            "LauanaOh\\Iso8583\\": "src/"
         },
         "files": [
             "src/Support/helpers.php"

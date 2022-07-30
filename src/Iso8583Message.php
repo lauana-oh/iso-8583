@@ -1,12 +1,12 @@
 <?php
 
-namespace Lauana\Iso;
+namespace LauanaOh\Iso8583;
 
-use Lauana\Iso\Contracts\Iso8583MessageContract;
-use Lauana\Iso\Entities\ByteStream;
-use Lauana\Iso\Entities\DataHolder;
-use Lauana\Iso\Entities\Specification;
-use Lauana\Iso\Support\Pipeline;
+use LauanaOh\Iso8583\Contracts\Iso8583MessageContract;
+use LauanaOh\Iso8583\Entities\ByteStream;
+use LauanaOh\Iso8583\Entities\DataHolder;
+use LauanaOh\Iso8583\Entities\Specification;
+use LauanaOh\Iso8583\Support\Pipeline;
 
 class Iso8583Message implements Iso8583MessageContract
 {

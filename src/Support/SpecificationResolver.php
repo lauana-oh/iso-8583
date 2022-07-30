@@ -1,9 +1,9 @@
 <?php
 
-namespace Lauana\Iso\Support;
+namespace LauanaOh\Iso8583\Support;
 
-use Lauana\Iso\Contracts\SpecificationResolverContract;
-use Lauana\Iso\Helpers\ContainerHelper;
+use LauanaOh\Iso8583\Contracts\SpecificationResolverContract;
+use LauanaOh\Iso8583\Helpers\ContainerHelper;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

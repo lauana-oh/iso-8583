@@ -1,9 +1,9 @@
 <?php
 
-namespace Lauana\Iso\Encoders;
+namespace LauanaOh\Iso8583\Encoders;
 
-use Lauana\Iso\Contracts\EncoderContract;
-use Lauana\Iso\Contracts\PaddingContract;
+use LauanaOh\Iso8583\Contracts\EncoderContract;
+use LauanaOh\Iso8583\Contracts\PaddingContract;
 
 class ASCII implements EncoderContract
 {

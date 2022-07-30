@@ -1,8 +1,8 @@
 <?php
 
-namespace Lauana\Iso\Traits;
+namespace LauanaOh\Iso8583\Traits;
 
-use Lauana\Iso\Contracts\EncoderContract;
+use LauanaOh\Iso8583\Contracts\EncoderContract;
 
 trait HasEncoder
 {

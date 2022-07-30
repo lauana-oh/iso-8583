@@ -1,10 +1,10 @@
 <?php
 
-namespace Lauana\Iso\Contracts;
+namespace LauanaOh\Iso8583\Contracts;
 
 use Closure;
-use Lauana\Iso\Entities\ByteStream;
-use Lauana\Iso\Entities\DataHolder;
+use LauanaOh\Iso8583\Entities\ByteStream;
+use LauanaOh\Iso8583\Entities\DataHolder;
 
 interface PipeContract
 {
