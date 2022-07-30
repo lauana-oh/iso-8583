@@ -19,12 +19,15 @@
     </testsuites>
     <coverage processUncoveredFiles="true">
         <include>
-            <directory suffix=".php">./app</directory>
+            <directory suffix=".php">./src</directory>
         </include>
+        <report>
+            <clover outputFile="clover.xml"/>
+            <html outputDirectory=".coverage/html" lowUpperBound="50" highLowerBound="90"/>
+        </report>
     </coverage>
     <logging>
         <junit outputFile=".coverage/report.junit.xml"/>
-        <testdoxHtml outputFile=".coverage/coverage"/>
         <testdoxText outputFile=".coverage/coverage.txt"/>
         <testdoxXml outputFile=".coverage/logs/clover.xml"/>
     </logging>
