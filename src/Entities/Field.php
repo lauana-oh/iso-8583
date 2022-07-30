@@ -58,6 +58,7 @@ class Field implements PipeContract
     public function setPadding(Padding $padding): self
     {
         $this->padding = $padding;
+
         return $this;
     }
 

@@ -2,7 +2,6 @@
 
 namespace Lauana\Iso\Entities;
 
-
 use Lauana\Iso\Contracts\PipeContract;
 
 class Bitmap implements PipeContract

@@ -26,7 +26,7 @@ class Specification
             return new Bitmap();
         }
 
-        if (!isset($this->settings['fields'][$field])) {
+        if (! isset($this->settings['fields'][$field])) {
             throw new \Exception('field: '.$field);
         }
 

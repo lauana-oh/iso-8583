@@ -30,7 +30,6 @@ use Lauana\Iso\Types\Numeric;
 use Lauana\Iso\Types\NumericSpecialCharacter;
 use Lauana\Iso\Types\SpecialCharacter;
 
-
 /*
 |--------------------------------------------------------------------------
 | Parameters bindings.
@@ -42,7 +41,7 @@ use Lauana\Iso\Types\SpecialCharacter;
 
 $container['base_specification'] = fn () => require 'base_specification.php';
 $container[Iso8583Message::class] = $container->factory(fn () => new Iso8583Message());
-$container[SpecificationResolverContract::class] = $container->factory(fn() => new SpecificationResolver());
+$container[SpecificationResolverContract::class] = $container->factory(fn () => new SpecificationResolver());
 $container[Field::class] = $container->factory(fn () => new Field());
 $container[Padding::class] = $container->factory(fn () => new Padding());
 
@@ -55,8 +54,8 @@ $container[Padding::class] = $container->factory(fn () => new Padding());
 | package.
 */
 
-$container['encoder_' . Encodes::TYPE_BCD] = fn() => new BCD();
-$container['encoder_' . Encodes::TYPE_ASCII] = fn() => new ASCII();
+$container['encoder_'.Encodes::TYPE_BCD] = fn () => new BCD();
+$container['encoder_'.Encodes::TYPE_ASCII] = fn () => new ASCII();
 
 /*
 |--------------------------------------------------------------------------
@@ -67,13 +66,13 @@ $container['encoder_' . Encodes::TYPE_ASCII] = fn() => new ASCII();
 | package.
 */
 
-$container['type_' . Types::TYPE_ALPHA] = $container->factory(fn () => new Alpha());
-$container['type_' . Types::TYPE_ALPHANUMERIC] = $container->factory(fn () => new AlphaNumeric());
-$container['type_' . Types::TYPE_ALPHANUMERIC_SPECIAL_CHAR] = $container->factory(fn () => new AlphaNumericSpecialCharacter());
-$container['type_' . Types::TYPE_BINARY] = $container->factory(fn () => new Binary());
-$container['type_' . Types::TYPE_NUMERIC] = $container->factory(fn () => new Numeric());
-$container['type_' . Types::TYPE_NUMERIC_SPECIAL_CHAR] = $container->factory(fn () => new NumericSpecialCharacter());
-$container['type_' . Types::TYPE_SPECIAL_CHAR] = $container->factory(fn () => new SpecialCharacter());
+$container['type_'.Types::TYPE_ALPHA] = $container->factory(fn () => new Alpha());
+$container['type_'.Types::TYPE_ALPHANUMERIC] = $container->factory(fn () => new AlphaNumeric());
+$container['type_'.Types::TYPE_ALPHANUMERIC_SPECIAL_CHAR] = $container->factory(fn () => new AlphaNumericSpecialCharacter());
+$container['type_'.Types::TYPE_BINARY] = $container->factory(fn () => new Binary());
+$container['type_'.Types::TYPE_NUMERIC] = $container->factory(fn () => new Numeric());
+$container['type_'.Types::TYPE_NUMERIC_SPECIAL_CHAR] = $container->factory(fn () => new NumericSpecialCharacter());
+$container['type_'.Types::TYPE_SPECIAL_CHAR] = $container->factory(fn () => new SpecialCharacter());
 
 /*
 |--------------------------------------------------------------------------
@@ -84,9 +83,9 @@ $container['type_' . Types::TYPE_SPECIAL_CHAR] = $container->factory(fn () => ne
 | package.
 */
 
-$container['length_'. strlen(Lengths::TYPE_FIXED)] = $container->factory(fn () => new Fixed());
-$container['length_'. strlen(Lengths::TYPE_LLVAR)] = $container->factory(fn () => new Llvar());
-$container['length_'. strlen(Lengths::TYPE_LLLVAR)] = $container->factory(fn () => new Lllvar());
+$container['length_'.strlen(Lengths::TYPE_FIXED)] = $container->factory(fn () => new Fixed());
+$container['length_'.strlen(Lengths::TYPE_LLVAR)] = $container->factory(fn () => new Llvar());
+$container['length_'.strlen(Lengths::TYPE_LLLVAR)] = $container->factory(fn () => new Lllvar());
 
 /*
 |--------------------------------------------------------------------------

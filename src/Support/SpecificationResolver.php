@@ -34,8 +34,8 @@ class SpecificationResolver extends OptionsResolver implements SpecificationReso
                     ->allowedValues(function ($value) {
                         $type = str_replace('.', '', $value, $length);
 
-                        return ContainerHelper::isDefined('type_' . $type)
-                            && ContainerHelper::isDefined('length_' . $length);
+                        return ContainerHelper::isDefined('type_'.$type)
+                            && ContainerHelper::isDefined('length_'.$length);
                     })->normalize(function (Options $options, $value) {
                         $value = str_replace('.', '', $value, $length);
 
@@ -52,7 +52,7 @@ class SpecificationResolver extends OptionsResolver implements SpecificationReso
                     ->allowedValues(function ($encodes) {
                         return empty(array_filter(
                             $encodes,
-                            fn ($value) => ! ContainerHelper::isDefined('encoder_'. $value)
+                            fn ($value) => ! ContainerHelper::isDefined('encoder_'.$value)
                         ));
                     })->normalize(function (Options $options, $encodes) {
                         return [

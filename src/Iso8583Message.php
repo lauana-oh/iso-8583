@@ -32,7 +32,7 @@ class Iso8583Message
         $message = new ByteStream($message);
 
         $data = Pipeline::unpack($message)
-            ->through($this->createPipes([0,'bitmap']))
+            ->through($this->createPipes([0, 'bitmap']))
             ->thenReturnData();
 
         return Pipeline::unpack($message, $data)

@@ -40,21 +40,21 @@ class ContainerHelper
 
     public static function getType(string $type): BaseType
     {
-        return iso8583_container('type_'. $type);
+        return iso8583_container('type_'.$type);
     }
 
     public static function getLength(string $length): BaseLength
     {
-        return iso8583_container('length_'. $length);
+        return iso8583_container('length_'.$length);
     }
 
     public static function getEncoder(string $encoder): EncoderContract
     {
-        return iso8583_container('encoder_'. $encoder);
+        return iso8583_container('encoder_'.$encoder);
     }
 
     public static function getTag(string $tag): BaseTag
     {
-        return iso8583_container('tag_'. $tag);
+        return iso8583_container('tag_'.$tag);
     }
 }

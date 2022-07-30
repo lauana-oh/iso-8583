@@ -11,7 +11,7 @@ if (! function_exists('iso8583_container')) {
 
         if (! $container) {
             $container = new Container();
-            require __DIR__. '/../../config/container.php';
+            require __DIR__.'/../../config/container.php';
         }
 
         return $abstract !== null ? $container[$abstract] : $container;

@@ -22,7 +22,7 @@ class Padding
 
     public function unpad(string $value): string
     {
-        if (!$this->size) {
+        if (! $this->size) {
             return $value;
         }
 
@@ -36,18 +36,21 @@ class Padding
     public function setPadString(string $padString): self
     {
         $this->padString = $padString;
+
         return $this;
     }
 
     public function setPosition(int $position): self
     {
         $this->position = $position;
+
         return $this;
     }
 
     public function setSize(int $size): self
     {
         $this->size = $size;
+
         return $this;
     }
 }
