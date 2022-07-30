@@ -10,11 +10,10 @@ class BCD implements EncoderContract
 {
     public function encode(string $data, PaddingContract $padding = null): string
     {
-        $size = strlen($data);
         $padding ??= ContainerHelper::getNewPadding();
 
-        if ($size % 2 !== 0) {
-            $padding->setSize(++$size);
+        if (strlen($data) % 2 !== 0) {
+            $padding->setSize(strlen($data) + 1);
         }
 
         return $padding->pad($data);

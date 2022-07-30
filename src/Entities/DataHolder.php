@@ -11,17 +11,19 @@ class DataHolder
         $this->data = $data;
     }
 
-    public function setField(string $key, $data)
-    {
-        $this->data[$key] = $data;
-    }
-
     public function getField(string $key)
     {
         return $this->data[$key] ?? null;
     }
 
-    public function unsetField(string $key)
+    public function setField(string $key, $data): self
+    {
+        $this->data[$key] = $data;
+
+        return $this;
+    }
+
+    public function unsetField(string $key): self
     {
         unset($this->data[$key]);
 

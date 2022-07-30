@@ -6,8 +6,8 @@ use Lauana\Iso\Contracts\PaddingContract;
 
 class Padding implements PaddingContract
 {
-    public const DEFAULT_PAD_STRING = '0';
-    public const DEFAULT_POSITION = STR_PAD_LEFT;
+    protected const DEFAULT_PAD_STRING = '0';
+    protected const DEFAULT_POSITION = STR_PAD_LEFT;
 
     protected string $padString = self::DEFAULT_PAD_STRING;
     protected int $position = self::DEFAULT_POSITION;
