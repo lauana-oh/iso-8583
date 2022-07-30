@@ -2,10 +2,14 @@
 
 namespace Tests\Feature\Unpack;
 
+use LauanaOh\Iso8583\Exceptions\InvalidValueException;
+use Tests\Concerns\HasFieldsDataProvider;
 use Tests\TestCase;
 
 class DecodeTest extends TestCase
 {
+    use HasFieldsDataProvider;
+
     public function testItCanDecodeAMessage()
     {
         $byteMessage = '020070200000020000001641107600000000080000000000000068000001233030';
@@ -136,5 +140,26 @@ class DecodeTest extends TestCase
         $this->fieldsData[2] = '411076000000008';
 
         $this->assertEquals($this->fieldsData, iso8583_decode($byteMessage, $specification));
+    }
+
+    /**
+     * @dataProvider dataType
+     */
+    public function testItCanNotDecodeDueInvalidDataType(string $type)
+    {
+        $byteMessage = '0200702000000200000061626331322A0000000000000068000001233030';
+
+        $specification['fields'] = [
+            2 => [
+                'type' => $type,
+                'encode' => 'ascii',
+                'length' => 6,
+            ],
+        ];
+
+        $this->expectException(InvalidValueException::class);
+        $this->expectExceptionMessage('[Field 2]: value "abc12*" is not valid type "'.$type.'".');
+
+        iso8583_decode($byteMessage, $specification);
     }
 }

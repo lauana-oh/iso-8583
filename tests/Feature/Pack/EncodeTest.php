@@ -2,10 +2,14 @@
 
 namespace Tests\Feature\Pack;
 
+use LauanaOh\Iso8583\Exceptions\InvalidValueException;
+use Tests\Concerns\HasFieldsDataProvider;
 use Tests\TestCase;
 
 class EncodeTest extends TestCase
 {
+    use HasFieldsDataProvider;
+
     public function testItCanEncodeAMessage()
     {
         $byteMessage = '020070200000020000001641107600000000080000000000000068000001233030';
@@ -145,5 +149,26 @@ class EncodeTest extends TestCase
         $this->fieldsData[2] = '411076000000008';
 
         $this->assertEquals($byteMessage, iso8583_encode($this->fieldsData, $specification));
+    }
+
+    /**
+     * @dataProvider dataType
+     */
+    public function testItCanNotEncodeDueInvalidDataType(string $type)
+    {
+        $specification['fields'] = [
+            2 => [
+                'type' => $type,
+                'encode' => 'bcd',
+                'length' => 6,
+            ],
+        ];
+
+        $this->fieldsData[2] = 'abc12*';
+
+        $this->expectException(InvalidValueException::class);
+        $this->expectExceptionMessage('[Field 2]: value "abc12*" is not valid type "'.$type.'".');
+
+        iso8583_encode($this->fieldsData, $specification);
     }
 }

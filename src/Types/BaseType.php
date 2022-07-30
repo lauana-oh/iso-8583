@@ -5,11 +5,14 @@ namespace LauanaOh\Iso8583\Types;
 use LauanaOh\Iso8583\Contracts\PipeContract;
 use LauanaOh\Iso8583\Entities\ByteStream;
 use LauanaOh\Iso8583\Entities\DataHolder;
+use LauanaOh\Iso8583\Exceptions\InvalidValueException;
 use LauanaOh\Iso8583\Traits\HasEncoder;
 
 abstract class BaseType implements PipeContract
 {
     use HasEncoder;
+
+    protected const TYPE = '';
 
     public function pack(DataHolder $data, ByteStream $message, \Closure $next)
     {
@@ -39,5 +42,12 @@ abstract class BaseType implements PipeContract
         return $next($data, $message);
     }
 
-    abstract public function validate(string $value): bool;
+    protected function validate(string $value)
+    {
+        if (!$this->isValid($value)) {
+            throw InvalidValueException::invalidType($value, static::TYPE);
+        }
+    }
+
+    abstract protected function isValid(string $value): bool;
 }

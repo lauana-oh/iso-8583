@@ -6,6 +6,8 @@ use Closure;
 use LauanaOh\Iso8583\Contracts\FieldContract;
 use LauanaOh\Iso8583\Contracts\PaddingContract;
 use LauanaOh\Iso8583\Contracts\PipeContract;
+use LauanaOh\Iso8583\Exceptions\InvalidValueException;
+use LauanaOh\Iso8583\Exceptions\Iso8583Exception;
 use LauanaOh\Iso8583\Support\Pipeline;
 
 class Field implements FieldContract
@@ -15,30 +17,40 @@ class Field implements FieldContract
      */
     protected array $components = [];
 
+    protected string $type = 'field';
     protected string $key = '';
     protected ?PaddingContract $padding = null;
 
     public function pack(DataHolder $data, ByteStream $message, Closure $next)
     {
-        $dataHolder = new DataHolder([
-            'value' => $data->getField($this->key),
-            'padding' => $this->padding,
-        ]);
+        try {
+            $dataHolder = new DataHolder([
+                'value' => $data->getField($this->key),
+                'padding' => $this->padding,
+            ]);
 
-        $message = Pipeline::pack($dataHolder, $message)
-            ->through($this->components)
-            ->thenReturnMessage();
+            $message = Pipeline::pack($dataHolder, $message)
+                ->through($this->components)
+                ->thenReturnMessage();
+
+        } catch (\Throwable $exception) {
+            throw InvalidValueException::invalidField($this->type, $this->getKey(), $exception);
+        }
 
         return $next($data, $message);
     }
 
     public function unpack(DataHolder $data, ByteStream $message, Closure $next)
     {
-        $fieldData = Pipeline::unpack($message, new DataHolder(['padding' => $this->padding]))
-            ->through($this->components)
-            ->thenReturnData();
+        try {
+            $fieldData = Pipeline::unpack($message, new DataHolder(['padding' => $this->padding]))
+                ->through($this->components)
+                ->thenReturnData();
 
-        $data->setField($fieldData->getField('key'), $fieldData->getField('value'));
+            $data->setField($fieldData->getField('key'), $fieldData->getField('value'));
+        } catch (\Throwable $exception) {
+            throw InvalidValueException::invalidField($this->type, $this->getKey(), $exception);
+        }
 
         return $next($data, $message);
     }
