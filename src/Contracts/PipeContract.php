@@ -11,4 +11,6 @@ interface PipeContract
     public function pack(DataHolder $data, ByteStream $message, Closure $next);
 
     public function unpack(DataHolder $data, ByteStream $message, Closure $next);
+
+    public function validate(DataHolder $data, ByteStream $message, Closure $next);
 }

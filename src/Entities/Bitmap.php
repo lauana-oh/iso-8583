@@ -2,6 +2,7 @@
 
 namespace LauanaOh\Iso8583\Entities;
 
+use Closure;
 use LauanaOh\Iso8583\Contracts\BitmapContract;
 
 class Bitmap implements BitmapContract
@@ -84,5 +85,10 @@ class Bitmap implements BitmapContract
         return array_map(function ($field) {
             return ++$field;
         }, array_keys($positionsFilled));
+    }
+
+    public function validate(DataHolder $data, ByteStream $message, Closure $next)
+    {
+        return $next($data, $message);
     }
 }

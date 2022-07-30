@@ -23,23 +23,9 @@ class Pipeline
         $this->message = $message;
     }
 
-    protected static function send(DataHolder $data, ByteStream $message): self
+    public static function send(DataHolder $data, ByteStream $message): self
     {
-        return new static($data, $message);
-    }
-
-    public static function pack(DataHolder $data, ByteStream $message = null): self
-    {
-        $message ??= new ByteStream();
-
-        return self::send($data, $message)->via('pack');
-    }
-
-    public static function unpack(ByteStream $message, DataHolder $data = null): self
-    {
-        $data ??= new DataHolder();
-
-        return self::send($data, $message)->via('unpack');
+        return new self($data, $message);
     }
 
     public function through($pipes): self
@@ -49,28 +35,46 @@ class Pipeline
         return $this;
     }
 
-    public function thenReturnData(): DataHolder
+    public function validate(): self
     {
-        return $this->then(function (DataHolder $data, ByteStream $message) {
-            return $data;
-        });
+        return $this->via('validate')->run();
     }
 
-    public function thenReturnMessage(): ByteStream
+    public function pack(): self
     {
-        return $this->then(function (DataHolder $data, ByteStream $message) {
-            return $message;
-        });
+        return $this->via('pack')->run();
     }
 
-    protected function via(string $method): self
+    public function unpack(): self
+    {
+        return $this->via('unpack')->run();
+    }
+
+    public function andReturnData(): DataHolder
+    {
+        return $this->data;
+    }
+
+    public function andReturnMessage(): ByteStream
+    {
+        return $this->message;
+    }
+
+    public function via(string $method): self
     {
         $this->method = $method;
 
         return $this;
     }
 
-    protected function then(Closure $destination)
+    public function run(): self
+    {
+        $this->then(fn (DataHolder $data, ByteStream $message) => null);
+
+        return $this;
+    }
+
+    public function then(Closure $destination)
     {
         $pipeline = array_reduce(array_reverse($this->pipes), $this->carry(), $this->prepareDestination($destination));
 

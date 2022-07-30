@@ -29,9 +29,11 @@ class Field implements FieldContract
                 'padding' => $this->padding,
             ]);
 
-            $message = Pipeline::pack($dataHolder, $message)
+            $message = Pipeline::send($dataHolder, $message)
                 ->through($this->components)
-                ->thenReturnMessage();
+                ->validate()
+                ->pack()
+                ->andReturnMessage();
         } catch (Throwable $exception) {
             throw InvalidValueException::invalidField($this->type, $this->getKey(), $exception);
         }
@@ -42,15 +44,22 @@ class Field implements FieldContract
     public function unpack(DataHolder $data, ByteStream $message, Closure $next)
     {
         try {
-            $fieldData = Pipeline::unpack($message, new DataHolder(['padding' => $this->padding]))
+            $fieldData = Pipeline::send(new DataHolder(['padding' => $this->padding]), $message)
                 ->through($this->components)
-                ->thenReturnData();
+                ->unpack()
+                ->validate()
+                ->andReturnData();
 
             $data->setField($fieldData->getField('key'), $fieldData->getField('value'));
         } catch (Throwable $exception) {
             throw InvalidValueException::invalidField($this->type, $this->getKey(), $exception);
         }
 
+        return $next($data, $message);
+    }
+
+    public function validate(DataHolder $data, ByteStream $message, Closure $next)
+    {
         return $next($data, $message);
     }
 

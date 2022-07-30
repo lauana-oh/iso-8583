@@ -23,22 +23,25 @@ class Iso8583Message implements Iso8583MessageContract
     {
         $fieldsData['bitmap'] = array_keys($fieldsData);
 
-        return Pipeline::pack(new DataHolder($fieldsData))
+        return Pipeline::send(new DataHolder($fieldsData), new ByteStream())
             ->through($this->createPipes(array_keys($fieldsData)))
-            ->thenReturnMessage();
+            ->pack()
+            ->andReturnMessage();
     }
 
     public function unpack(string $message)
     {
         $message = new ByteStream($message);
 
-        $data = Pipeline::unpack($message)
+        $data = Pipeline::send(new DataHolder(), $message)
             ->through($this->createPipes([0, 'bitmap']))
-            ->thenReturnData();
+            ->unpack()
+            ->andReturnData();
 
-        return Pipeline::unpack($message, $data)
+        return Pipeline::send($data, $message)
             ->through($this->createPipes($data->getField('bitmap')))
-            ->thenReturnData()
+            ->unpack()
+            ->andReturnData()
             ->unsetField('bitmap')
             ->toArray();
     }
