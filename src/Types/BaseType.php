@@ -44,7 +44,7 @@ abstract class BaseType implements PipeContract
 
     protected function validate(string $value)
     {
-        if (!$this->isValid($value)) {
+        if (! $this->isValid($value)) {
             throw InvalidValueException::invalidType($value, static::TYPE);
         }
     }

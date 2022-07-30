@@ -7,8 +7,8 @@ use LauanaOh\Iso8583\Contracts\FieldContract;
 use LauanaOh\Iso8583\Contracts\PaddingContract;
 use LauanaOh\Iso8583\Contracts\PipeContract;
 use LauanaOh\Iso8583\Exceptions\InvalidValueException;
-use LauanaOh\Iso8583\Exceptions\Iso8583Exception;
 use LauanaOh\Iso8583\Support\Pipeline;
+use Throwable;
 
 class Field implements FieldContract
 {
@@ -32,8 +32,7 @@ class Field implements FieldContract
             $message = Pipeline::pack($dataHolder, $message)
                 ->through($this->components)
                 ->thenReturnMessage();
-
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             throw InvalidValueException::invalidField($this->type, $this->getKey(), $exception);
         }
 
@@ -48,7 +47,7 @@ class Field implements FieldContract
                 ->thenReturnData();
 
             $data->setField($fieldData->getField('key'), $fieldData->getField('value'));
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             throw InvalidValueException::invalidField($this->type, $this->getKey(), $exception);
         }
 
