@@ -14,11 +14,10 @@ class BCD implements EncoderContract
         $padding ??= ContainerHelper::getNewPadding();
 
         if ($size % 2 !== 0) {
-            $padding->setIsActive(true);
-            $size++;
+            $padding->setSize(++$size);
         }
 
-        return $padding->pad($data, $size);
+        return $padding->pad($data);
     }
 
     public function decode(string $data, Padding $padding = null): string

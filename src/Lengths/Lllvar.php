@@ -17,7 +17,8 @@ class Lllvar extends BaseLength
 
     public function unpack(DataHolder $data, ByteStream $message, \Closure $next)
     {
-        $data->setField('length', $this->encoder->decode($message->getAndMoveCursor($this->encoder->getDigits(3))));
+        $length = $this->encoder->decode($message->getAndMoveCursor($this->encoder->getDigits(3)));
+        $data->setField('length', $length);
 
         return $next($data, $message);
     }

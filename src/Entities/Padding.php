@@ -7,17 +7,12 @@ class Padding
     public const DEFAULT_PAD_STRING = '0';
     public const DEFAULT_TYPE = STR_PAD_LEFT;
 
-    protected bool $isActive = false;
     protected string $padString = self::DEFAULT_PAD_STRING;
     protected int $position = self::DEFAULT_TYPE;
     protected int $size = 0;
 
-    public function pad(string $value, int $size): string
+    public function pad(string $value): string
     {
-        if ($this->isActive) {
-            $value = str_pad($value, $size, $this->padString, $this->position);
-        }
-
         if ($this->size) {
             $value = str_pad($value, $this->size, $this->padString, $this->position);
         }
@@ -27,26 +22,15 @@ class Padding
 
     public function unpad(string $value): string
     {
-        if (!$this->isActive) {
+        if (!$this->size) {
             return $value;
         }
 
         if ($this->position === STR_PAD_LEFT) {
-            return substr($value, 1);
+            return substr($value, -$this->size);
         }
 
-        return  substr($value, 0, -1);
-    }
-
-    public function isActive(): bool
-    {
-        return $this->isActive;
-    }
-
-    public function setIsActive(bool $isActive): self
-    {
-        $this->isActive = $isActive;
-        return $this;
+        return  substr($value, 0, $this->size);
     }
 
     public function setPadString(string $padString): self

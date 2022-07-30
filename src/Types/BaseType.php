@@ -25,8 +25,12 @@ abstract class BaseType implements PipeContract
 
     public function unpack(DataHolder $data, ByteStream $message, \Closure $next)
     {
+        $padding = $data->getField('padding');
+        $padding->setSize($data->getField('length'));
+
         $value = $this->encoder->decode(
-            $message->getAndMoveCursor($this->encoder->getDigits($data->getField('length')))
+            $message->getAndMoveCursor($this->encoder->getDigits($data->getField('length'))),
+            $padding
         );
 
         $this->validate($value);

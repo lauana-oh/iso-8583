@@ -2,6 +2,7 @@
 
 namespace Lauana\Iso;
 
+use Lauana\Iso\Entities\ByteStream;
 use Lauana\Iso\Entities\DataHolder;
 use Lauana\Iso\Entities\Specification;
 use Lauana\Iso\Support\Pipeline;
@@ -28,7 +29,17 @@ class Iso8583Message
 
     public function unpack(string $message)
     {
+        $message = new ByteStream($message);
 
+        $data = Pipeline::unpack($message)
+            ->through($this->createPipes([0,'bitmap']))
+            ->thenReturnData();
+
+        return Pipeline::unpack($message, $data)
+            ->through($this->createPipes($data->getField('bitmap')))
+            ->thenReturnData()
+            ->unsetField('bitmap')
+            ->toArray();
     }
 
     protected function createPipes(array $fields): array
