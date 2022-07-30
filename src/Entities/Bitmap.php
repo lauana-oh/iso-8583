@@ -14,7 +14,7 @@ class Bitmap implements BitmapContract
         return self::FIELD_KEY;
     }
 
-    public function pack(DataHolder $data, ByteStream $message, \Closure $next)
+    public function pack(DataHolder $data, ByteStream $message, Closure $next)
     {
         $fieldsData = $data->toArray();
         unset($fieldsData['bitmap']);
@@ -29,7 +29,7 @@ class Bitmap implements BitmapContract
         return $next($data, $message);
     }
 
-    public function unpack(DataHolder $data, ByteStream $message, \Closure $next)
+    public function unpack(DataHolder $data, ByteStream $message, Closure $next)
     {
         $bits = $this->unpackBitmapBytesToBits($message);
 
