@@ -100,11 +100,17 @@ class EncodeTest extends TestCase
         $specification = [
             'fields' => [
                 2 => [
+                    'type' => 'n..',
+                    'encode' => 'bcd',
+                    'length' => 19,
                     'padding' => [
                         'value' => 'F',
                     ],
                 ],
                 4 => [
+                    'type' => 'n',
+                    'encode' => 'bcd',
+                    'length' => 12,
                     'padding' => [
                         'length' => 12,
                     ],

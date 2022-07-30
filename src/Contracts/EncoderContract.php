@@ -10,7 +10,7 @@ interface EncoderContract
 
     public function decode(string $data, ?Padding $padding = null): string;
 
-    public function getSize(int $length, ?Padding $padding = null): int;
+    public function getSize(int $length): int;
 
-    public function getDigits(int $length, ?Padding $padding = null): int;
+    public function getDigits(int $length): int;
 }

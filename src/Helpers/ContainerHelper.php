@@ -5,6 +5,7 @@ namespace Lauana\Iso\Helpers;
 use Lauana\Iso\Contracts\EncoderContract;
 use Lauana\Iso\Contracts\SpecificationResolverContract;
 use Lauana\Iso\Entities\Field;
+use Lauana\Iso\Entities\Padding;
 use Lauana\Iso\Iso8583Message;
 use Lauana\Iso\Lengths\BaseLength;
 use Lauana\Iso\Tags\BaseTag;
@@ -27,9 +28,14 @@ class ContainerHelper
         return iso8583_container(Field::class);
     }
 
+    public static function getNewPadding(): Padding
+    {
+        return iso8583_container(Padding::class);
+    }
+
     public static function getSpecificationResolver(): SpecificationResolverContract
     {
-        return iso8583_container('specificationResolver');
+        return iso8583_container(SpecificationResolverContract::class);
     }
 
     public static function getType(string $type): BaseType

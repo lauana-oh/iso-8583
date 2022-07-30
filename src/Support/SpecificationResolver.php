@@ -60,6 +60,13 @@ class SpecificationResolver extends OptionsResolver implements SpecificationReso
                             'length' => $encodes[0],
                         ];
                     });
+
+                $resolver->define('padding')
+                    ->default(function (OptionsResolver $paddingResolver) {
+                        $paddingResolver->define('value')->allowedTypes('string');
+                        $paddingResolver->define('length')->allowedTypes('int');
+                        $paddingResolver->define('position')->allowedValues(STR_PAD_LEFT, STR_PAD_RIGHT);
+                    });
             });
     }
 }
