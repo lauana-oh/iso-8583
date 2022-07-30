@@ -2,6 +2,7 @@
 
 namespace Lauana\Iso\Helpers;
 
+use Lauana\Iso\Contracts\BitmapContract;
 use Lauana\Iso\Contracts\EncoderContract;
 use Lauana\Iso\Contracts\FieldContract;
 use Lauana\Iso\Contracts\Iso8583MessageContract;
@@ -21,6 +22,11 @@ class ContainerHelper
     public static function getIso8583Message(): Iso8583MessageContract
     {
         return iso8583_container(Iso8583MessageContract::class);
+    }
+
+    public static function getBitmap(): BitmapContract
+    {
+        return iso8583_container(BitmapContract::class);
     }
 
     public static function getNewField(): FieldContract

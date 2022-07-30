@@ -11,12 +11,14 @@
 use Lauana\Iso\Constants\Encodes;
 use Lauana\Iso\Constants\Lengths;
 use Lauana\Iso\Constants\Types;
+use Lauana\Iso\Contracts\BitmapContract;
 use Lauana\Iso\Contracts\FieldContract;
 use Lauana\Iso\Contracts\Iso8583MessageContract;
 use Lauana\Iso\Contracts\PaddingContract;
 use Lauana\Iso\Contracts\SpecificationResolverContract;
 use Lauana\Iso\Encoders\ASCII;
 use Lauana\Iso\Encoders\BCD;
+use Lauana\Iso\Entities\Bitmap;
 use Lauana\Iso\Entities\Field;
 use Lauana\Iso\Entities\Padding;
 use Lauana\Iso\Iso8583Message;
@@ -45,6 +47,7 @@ use Lauana\Iso\Types\SpecialCharacter;
 $container['base_specification'] = fn () => require 'base_specification.php';
 $container[Iso8583MessageContract::class] = $container->factory(fn () => new Iso8583Message());
 $container[SpecificationResolverContract::class] = $container->factory(fn () => new SpecificationResolver());
+$container[BitmapContract::class] = fn () => new Bitmap();
 $container[FieldContract::class] = $container->factory(fn () => new Field());
 $container[PaddingContract::class] = $container->factory(fn () => new Padding());
 

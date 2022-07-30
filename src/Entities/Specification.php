@@ -23,7 +23,7 @@ class Specification
     public function getFieldPipe(string $field): PipeContract
     {
         if ($field === 'bitmap') {
-            return new Bitmap();
+            return ContainerHelper::getBitmap();
         }
 
         if (! isset($this->settings['fields'][$field])) {

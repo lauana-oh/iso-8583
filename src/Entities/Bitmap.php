@@ -2,15 +2,15 @@
 
 namespace Lauana\Iso\Entities;
 
-use Lauana\Iso\Contracts\PipeContract;
+use Lauana\Iso\Contracts\BitmapContract;
 
-class Bitmap implements PipeContract
+class Bitmap implements BitmapContract
 {
-    protected string $key = '1';
+    protected const FIELD_KEY = '1';
 
     public function getKey(): string
     {
-        return $this->key;
+        return self::FIELD_KEY;
     }
 
     public function pack(DataHolder $data, ByteStream $message, \Closure $next)
@@ -54,7 +54,7 @@ class Bitmap implements PipeContract
     protected function fillInPresentFields(array $fieldsPresent, string &$bits): void
     {
         foreach ($fieldsPresent as $field) {
-            $bits[$field - 1] = '1';
+            $bits[$field - 1] = true;
         }
     }
 
