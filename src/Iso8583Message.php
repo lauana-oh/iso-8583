@@ -2,12 +2,13 @@
 
 namespace Lauana\Iso;
 
+use Lauana\Iso\Contracts\Iso8583MessageContract;
 use Lauana\Iso\Entities\ByteStream;
 use Lauana\Iso\Entities\DataHolder;
 use Lauana\Iso\Entities\Specification;
 use Lauana\Iso\Support\Pipeline;
 
-class Iso8583Message
+class Iso8583Message implements Iso8583MessageContract
 {
     private Specification $specification;
 

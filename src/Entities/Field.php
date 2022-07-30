@@ -3,10 +3,12 @@
 namespace Lauana\Iso\Entities;
 
 use Closure;
+use Lauana\Iso\Contracts\FieldContract;
+use Lauana\Iso\Contracts\PaddingContract;
 use Lauana\Iso\Contracts\PipeContract;
 use Lauana\Iso\Support\Pipeline;
 
-class Field implements PipeContract
+class Field implements FieldContract
 {
     /**
      * @var PipeContract[]
@@ -14,7 +16,7 @@ class Field implements PipeContract
     protected array $components = [];
 
     protected string $key = '';
-    protected ?Padding $padding = null;
+    protected ?PaddingContract $padding = null;
 
     public function pack(DataHolder $data, ByteStream $message, Closure $next)
     {
@@ -55,7 +57,7 @@ class Field implements PipeContract
         return $this;
     }
 
-    public function setPadding(Padding $padding): self
+    public function setPadding(PaddingContract $padding): self
     {
         $this->padding = $padding;
 

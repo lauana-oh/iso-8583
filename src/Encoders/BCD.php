@@ -3,12 +3,12 @@
 namespace Lauana\Iso\Encoders;
 
 use Lauana\Iso\Contracts\EncoderContract;
-use Lauana\Iso\Entities\Padding;
+use Lauana\Iso\Contracts\PaddingContract;
 use Lauana\Iso\Helpers\ContainerHelper;
 
 class BCD implements EncoderContract
 {
-    public function encode(string $data, Padding $padding = null): string
+    public function encode(string $data, PaddingContract $padding = null): string
     {
         $size = strlen($data);
         $padding ??= ContainerHelper::getNewPadding();
@@ -20,11 +20,11 @@ class BCD implements EncoderContract
         return $padding->pad($data);
     }
 
-    public function decode(string $data, Padding $padding = null): string
+    public function decode(string $data, PaddingContract $padding = null): string
     {
         $padding ??= ContainerHelper::getNewPadding();
 
-        return $padding->unpad($data);
+        return $padding->trim($data);
     }
 
     public function getSize(int $length): int

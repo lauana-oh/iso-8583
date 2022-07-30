@@ -11,6 +11,9 @@
 use Lauana\Iso\Constants\Encodes;
 use Lauana\Iso\Constants\Lengths;
 use Lauana\Iso\Constants\Types;
+use Lauana\Iso\Contracts\FieldContract;
+use Lauana\Iso\Contracts\Iso8583MessageContract;
+use Lauana\Iso\Contracts\PaddingContract;
 use Lauana\Iso\Contracts\SpecificationResolverContract;
 use Lauana\Iso\Encoders\ASCII;
 use Lauana\Iso\Encoders\BCD;
@@ -40,10 +43,10 @@ use Lauana\Iso\Types\SpecialCharacter;
 */
 
 $container['base_specification'] = fn () => require 'base_specification.php';
-$container[Iso8583Message::class] = $container->factory(fn () => new Iso8583Message());
+$container[Iso8583MessageContract::class] = $container->factory(fn () => new Iso8583Message());
 $container[SpecificationResolverContract::class] = $container->factory(fn () => new SpecificationResolver());
-$container[Field::class] = $container->factory(fn () => new Field());
-$container[Padding::class] = $container->factory(fn () => new Padding());
+$container[FieldContract::class] = $container->factory(fn () => new Field());
+$container[PaddingContract::class] = $container->factory(fn () => new Padding());
 
 /*
 |--------------------------------------------------------------------------

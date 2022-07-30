@@ -3,16 +3,16 @@
 namespace Lauana\Iso\Encoders;
 
 use Lauana\Iso\Contracts\EncoderContract;
-use Lauana\Iso\Entities\Padding;
+use Lauana\Iso\Contracts\PaddingContract;
 
 class ASCII implements EncoderContract
 {
-    public function encode(string $data, Padding $padding = null): string
+    public function encode(string $data, PaddingContract $padding = null): string
     {
         return strtoupper(bin2hex($data));
     }
 
-    public function decode(string $data, Padding $padding = null): string
+    public function decode(string $data, PaddingContract $padding = null): string
     {
         return hex2bin($data);
     }

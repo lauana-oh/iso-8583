@@ -42,8 +42,8 @@ class Specification
             ->setEncoder(ContainerHelper::getEncoder($fieldSettings['encode']['value']));
 
         $padding = ContainerHelper::getNewPadding()
-            ->setPadString($fieldSettings['padding']['value'] ?? Padding::DEFAULT_PAD_STRING)
-            ->setPosition($fieldSettings['padding']['position'] ?? Padding::DEFAULT_TYPE)
+            ->setPadString($fieldSettings['padding']['value'] ?? null)
+            ->setPosition($fieldSettings['padding']['position'] ?? null)
             ->setSize($fieldSettings['padding']['length'] ?? 0);
 
         return ContainerHelper::getNewField()

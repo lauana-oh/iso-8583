@@ -1,7 +1,6 @@
 <?php
 
 use Lauana\Iso\Helpers\ContainerHelper;
-use Lauana\Iso\Iso8583Message;
 use Pimple\Container;
 
 if (! function_exists('iso8583_container')) {

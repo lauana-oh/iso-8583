@@ -2,13 +2,15 @@
 
 namespace Lauana\Iso\Entities;
 
-class Padding
+use Lauana\Iso\Contracts\PaddingContract;
+
+class Padding implements PaddingContract
 {
     public const DEFAULT_PAD_STRING = '0';
-    public const DEFAULT_TYPE = STR_PAD_LEFT;
+    public const DEFAULT_POSITION = STR_PAD_LEFT;
 
     protected string $padString = self::DEFAULT_PAD_STRING;
-    protected int $position = self::DEFAULT_TYPE;
+    protected int $position = self::DEFAULT_POSITION;
     protected int $size = 0;
 
     public function pad(string $value): string
@@ -20,7 +22,7 @@ class Padding
         return $value;
     }
 
-    public function unpad(string $value): string
+    public function trim(string $value): string
     {
         if (! $this->size) {
             return $value;
@@ -33,21 +35,21 @@ class Padding
         return  substr($value, 0, $this->size);
     }
 
-    public function setPadString(string $padString): self
+    public function setPadString(?string $padString): self
     {
-        $this->padString = $padString;
+        $this->padString = $padString ?? self::DEFAULT_PAD_STRING;
 
         return $this;
     }
 
-    public function setPosition(int $position): self
+    public function setPosition(?int $position): self
     {
-        $this->position = $position;
+        $this->position = $position ?? self::DEFAULT_POSITION;
 
         return $this;
     }
 
-    public function setSize(int $size): self
+    public function setSize(int $size = 0): self
     {
         $this->size = $size;
 
