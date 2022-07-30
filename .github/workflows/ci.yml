@@ -8,7 +8,7 @@ on:
       - main
 
 jobs:
-  laravel-tests:
+  tests:
 
     runs-on: ubuntu-latest
 
