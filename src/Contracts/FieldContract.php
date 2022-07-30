@@ -7,9 +7,9 @@ interface FieldContract extends PipeContract
     /**
      * @param PipeContract[] $components
      */
-    public function setComponents(array $components): FieldContract;
+    public function setComponents(array $components): self;
 
-    public function setPadding(PaddingContract $padding): FieldContract;
+    public function setPadding(PaddingContract $padding): self;
 
     public function getKey(): string;
 }

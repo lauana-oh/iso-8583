@@ -10,7 +10,7 @@ interface PaddingContract
 
     public function trim(string $value): string;
 
-    public function setPadString(?string $padString): PaddingContract;
+    public function setPadString(?string $padString): self;
 
     public function setPosition(?int $position): Padding;
 
