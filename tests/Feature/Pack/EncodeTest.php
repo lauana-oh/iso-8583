@@ -3,6 +3,7 @@
 namespace Tests\Feature\Pack;
 
 use LauanaOh\Iso8583\Exceptions\EncodeException;
+use LauanaOh\Iso8583\Exceptions\InvalidFieldException;
 use Tests\Concerns\HasFieldsDataProvider;
 use Tests\TestCase;
 
@@ -210,6 +211,25 @@ class EncodeTest extends TestCase
 
         $this->expectException(EncodeException::class);
         $this->expectExceptionMessage(sprintf($message, 2, $this->fieldsData[2]));
+
+        iso8583_encode($this->fieldsData, $specification);
+    }
+
+    public function testItCanNotEncodeDueUndefined()
+    {
+        $specification = [
+            'override' => true,
+            'fields' => [
+                0 => [
+                    'type' => 'n',
+                    'length' => 4,
+                    'encode' => 'bcd',
+                ],
+            ],
+        ];
+
+        $this->expectException(InvalidFieldException::class);
+        $this->expectExceptionMessage('[Field 2]: Field has no specification set');
 
         iso8583_encode($this->fieldsData, $specification);
     }

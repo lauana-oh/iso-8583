@@ -3,6 +3,7 @@
 namespace Tests\Feature\Unpack;
 
 use LauanaOh\Iso8583\Exceptions\DecodeException;
+use LauanaOh\Iso8583\Exceptions\InvalidFieldException;
 use LauanaOh\Iso8583\Exceptions\InvalidValueException;
 use Tests\Concerns\HasFieldsDataProvider;
 use Tests\TestCase;
@@ -186,7 +187,7 @@ class DecodeTest extends TestCase
         iso8583_decode($byteMessage, $specification);
     }
 
-    public function testItCanNotDecodeDueMessageStreamExausted()
+    public function testItCanNotDecodeDueMessageStreamExhausted()
     {
         $byteMessage = '3032303070200000020000023136343131303736303030303030303030383030303';
 
@@ -194,5 +195,26 @@ class DecodeTest extends TestCase
         $this->expectExceptionMessage('[Field 55]: The message stream is exhaust');
 
         iso8583_decode($byteMessage);
+    }
+
+    public function testItCanNotDecodeDueUndefined()
+    {
+        $byteMessage = '3032303070200000020000023136343131303736303030303030303030383030303';
+
+        $specification = [
+            'override' => true,
+            'fields' => [
+                0 => [
+                    'type' => 'n',
+                    'length' => 4,
+                    'encode' => 'bcd',
+                ],
+            ],
+        ];
+
+        $this->expectException(InvalidFieldException::class);
+        $this->expectExceptionMessage('[Field 2]: Field has no specification set');
+
+        iso8583_decode($byteMessage, $specification);
     }
 }

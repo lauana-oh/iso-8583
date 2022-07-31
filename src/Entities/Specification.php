@@ -3,6 +3,7 @@
 namespace LauanaOh\Iso8583\Entities;
 
 use LauanaOh\Iso8583\Contracts\PipeContract;
+use LauanaOh\Iso8583\Exceptions\InvalidFieldException;
 use LauanaOh\Iso8583\Helpers\ContainerHelper;
 
 class Specification
@@ -11,7 +12,7 @@ class Specification
 
     public function __construct(array $settings)
     {
-        if ($settings['override'] ?? true) {
+        if (!isset($settings['override']) || !$settings['override']) {
             $settings['fields'] = array_replace(iso8583_container('base_specification'), $settings['fields'] ?? []);
         }
 
@@ -27,7 +28,7 @@ class Specification
         }
 
         if (! isset($this->settings['fields'][$field])) {
-            throw new \Exception('field: '.$field);
+            throw InvalidFieldException::undefinedField($field);
         }
 
         $fieldSettings = $this->settings['fields'][$field];
