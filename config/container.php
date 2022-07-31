@@ -52,7 +52,6 @@ $container[Iso8583MessageContract::class] = $container->factory(fn () => new Iso
 $container[FieldContract::class] = $container->factory(fn () => new Field());
 $container[PaddingContract::class] = $container->factory(fn () => new Padding());
 
-
 /*
 |--------------------------------------------------------------------------
 | Settings bindings.

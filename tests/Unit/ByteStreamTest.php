@@ -48,7 +48,7 @@ class ByteStreamTest extends TestCase
     {
         $byteStream = new ByteStream('1234567890');
 
-        $this->assertEquals('1234567890', (string)$byteStream);
+        $this->assertEquals('1234567890', (string) $byteStream);
         $this->assertEquals(10, strlen($byteStream));
     }
 }

@@ -31,7 +31,7 @@ class SpecificationNormalizer extends OptionsResolver implements SpecificationNo
             ->allowedTypes('array')
             ->default(ContainerHelper::getBaseSpecification())
             ->normalize(function (Options $options, $value) {
-                if (!$options['override']) {
+                if (! $options['override']) {
                     $value = array_replace(ContainerHelper::getBaseSpecification(), $value);
                 }
 
