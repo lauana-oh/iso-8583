@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Entities;
 
 use LauanaOh\Iso8583\Entities\ByteStream;
 use PHPUnit\Framework\TestCase;

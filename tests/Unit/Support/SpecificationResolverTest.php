@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Support;
 
 use LauanaOh\Iso8583\Entities\Padding;
 use LauanaOh\Iso8583\Support\SpecificationResolver;
