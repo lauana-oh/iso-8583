@@ -2,6 +2,7 @@
 
 namespace LauanaOh\Iso8583\Helpers;
 
+use LauanaOh\Iso8583\Contract\SpecificationNormalizerContract;
 use LauanaOh\Iso8583\Contracts\BitmapContract;
 use LauanaOh\Iso8583\Contracts\EncoderContract;
 use LauanaOh\Iso8583\Contracts\FieldContract;
@@ -24,6 +25,11 @@ class ContainerHelper
         return iso8583_container(Iso8583MessageContract::class);
     }
 
+    public static function getBaseSpecification(): array
+    {
+        return iso8583_container('base_specification');
+    }
+
     public static function getBitmap(): BitmapContract
     {
         return iso8583_container(BitmapContract::class);
@@ -42,6 +48,11 @@ class ContainerHelper
     public static function getSpecificationResolver(): SpecificationResolverContract
     {
         return iso8583_container(SpecificationResolverContract::class);
+    }
+
+    public static function getSpecificationNormalizer(): SpecificationNormalizerContract
+    {
+        return iso8583_container(SpecificationNormalizerContract::class);
     }
 
     public static function getType(string $type): BaseType

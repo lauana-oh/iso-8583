@@ -12,6 +12,11 @@ class Iso8583Message implements Iso8583MessageContract
 {
     private Specification $specification;
 
+    public function __construct(array $setting = [])
+    {
+        $this->setSpecification($setting);
+    }
+
     public function setSpecification(array $settings): self
     {
         $this->specification = new Specification($settings);

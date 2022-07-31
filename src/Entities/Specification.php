@@ -12,13 +12,9 @@ class Specification
 
     public function __construct(array $settings)
     {
-        if (!isset($settings['override']) || !$settings['override']) {
-            $settings['fields'] = array_replace(iso8583_container('base_specification'), $settings['fields'] ?? []);
-        }
-
-        $settings['fields'] = $this->parseEncodes($settings['fields']);
-
-        $this->settings = ContainerHelper::getSpecificationResolver()->resolveSettings($settings);
+        $this->settings = ContainerHelper::getSpecificationResolver()->resolveSettings(
+            ContainerHelper::getSpecificationNormalizer()->normalizeSettings($settings)
+        );
     }
 
     public function getFieldPipe(string $field): PipeContract
@@ -50,17 +46,5 @@ class Specification
         return ContainerHelper::getNewField()
             ->setComponents(compact('key', 'length', 'value'))
             ->setPadding($padding);
-    }
-
-    protected function parseEncodes($fields): array
-    {
-        return array_map(function ($data) {
-            if (isset($data['encode']) && is_string($data['encode'])) {
-                $encodes = explode(',', $data['encode']);
-                $data['encode'] = array_map('trim', $encodes);
-            }
-
-            return $data;
-        }, $fields ?? []);
     }
 }

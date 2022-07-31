@@ -11,6 +11,7 @@
 use LauanaOh\Iso8583\Constants\Encodes;
 use LauanaOh\Iso8583\Constants\Lengths;
 use LauanaOh\Iso8583\Constants\Types;
+use LauanaOh\Iso8583\Contract\SpecificationNormalizerContract;
 use LauanaOh\Iso8583\Contracts\BitmapContract;
 use LauanaOh\Iso8583\Contracts\FieldContract;
 use LauanaOh\Iso8583\Contracts\Iso8583MessageContract;
@@ -25,6 +26,7 @@ use LauanaOh\Iso8583\Iso8583Message;
 use LauanaOh\Iso8583\Lengths\Fixed;
 use LauanaOh\Iso8583\Lengths\LLLVAR;
 use LauanaOh\Iso8583\Lengths\LLVAR;
+use LauanaOh\Iso8583\Support\SpecificationNormalizer;
 use LauanaOh\Iso8583\Support\SpecificationResolver;
 use LauanaOh\Iso8583\Tags\Invisible;
 use LauanaOh\Iso8583\Types\Alpha;
@@ -45,12 +47,24 @@ use LauanaOh\Iso8583\Types\SpecialCharacter;
 | package.
 */
 
-$container['base_specification'] = fn () => require 'base_specification.php';
-$container[Iso8583MessageContract::class] = $container->factory(fn () => new Iso8583Message());
-$container[SpecificationResolverContract::class] = $container->factory(fn () => new SpecificationResolver());
 $container[BitmapContract::class] = fn () => new Bitmap();
+$container[Iso8583MessageContract::class] = $container->factory(fn () => new Iso8583Message());
 $container[FieldContract::class] = $container->factory(fn () => new Field());
 $container[PaddingContract::class] = $container->factory(fn () => new Padding());
+
+
+/*
+|--------------------------------------------------------------------------
+| Settings bindings.
+|--------------------------------------------------------------------------
+|
+| This section set the bindings of settings to the
+| package.
+*/
+
+$container['base_specification'] = fn () => require 'base_specification.php';
+$container[SpecificationResolverContract::class] = fn () => new SpecificationResolver();
+$container[SpecificationNormalizerContract::class] = fn () => new SpecificationNormalizer();
 
 /*
 |--------------------------------------------------------------------------

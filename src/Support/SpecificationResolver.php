@@ -9,11 +9,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SpecificationResolver extends OptionsResolver implements SpecificationResolverContract
 {
-    public function resolveSettings(array $settings): array
+    public function __construct()
     {
         $this->defineOverride();
         $this->defineFields();
+    }
 
+    public function resolveSettings(array $settings): array
+    {
         return $this->resolve($settings);
     }
 
