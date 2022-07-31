@@ -8,10 +8,13 @@
 | This container following the PSR-11 specification.
 */
 
+use LauanaOh\Iso8583\Builders\FieldBuilderFactory;
 use LauanaOh\Iso8583\Constants\Encodes;
 use LauanaOh\Iso8583\Constants\Lengths;
 use LauanaOh\Iso8583\Constants\Types;
 use LauanaOh\Iso8583\Contracts\BitmapContract;
+use LauanaOh\Iso8583\Contracts\FieldBuilderFactoryContract;
+use LauanaOh\Iso8583\Contracts\FieldBuilderContract;
 use LauanaOh\Iso8583\Contracts\FieldContract;
 use LauanaOh\Iso8583\Contracts\Iso8583MessageContract;
 use LauanaOh\Iso8583\Contracts\PaddingContract;
@@ -51,13 +54,14 @@ $container[BitmapContract::class] = fn () => new Bitmap();
 $container[Iso8583MessageContract::class] = $container->factory(fn () => new Iso8583Message());
 $container[FieldContract::class] = $container->factory(fn () => new Field());
 $container[PaddingContract::class] = $container->factory(fn () => new Padding());
+$container[FieldBuilderFactoryContract::class] = fn () => new FieldBuilderFactory();
 
 /*
 |--------------------------------------------------------------------------
-| Settings bindings.
+| Specification bindings.
 |--------------------------------------------------------------------------
 |
-| This section set the bindings of settings to the
+| This section set the bindings of specification to the
 | package.
 */
 

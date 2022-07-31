@@ -29,22 +29,8 @@ class Specification
 
         $fieldSettings = $this->settings['fields'][$field];
 
-        $key = ContainerHelper::getTag('invisible')->setValue($field);
-
-        $length = ContainerHelper::getLength($fieldSettings['type']['length'])
-            ->setEncoder(ContainerHelper::getEncoder($fieldSettings['encode']['length']))
-            ->setSize($fieldSettings['length']);
-
-        $value = ContainerHelper::getType($fieldSettings['type']['value'])
-            ->setEncoder(ContainerHelper::getEncoder($fieldSettings['encode']['value']));
-
-        $padding = ContainerHelper::getNewPadding()
-            ->setPadString($fieldSettings['padding']['value'])
-            ->setPosition($fieldSettings['padding']['position'])
-            ->setSize($fieldSettings['padding']['length']);
-
-        return ContainerHelper::getNewField()
-            ->setComponents(compact('key', 'length', 'value'))
-            ->setPadding($padding);
+        return ContainerHelper::getFieldBuilderFactory()
+            ->getFieldBuilder($fieldSettings)
+            ->createField($field, $fieldSettings);
     }
 }
