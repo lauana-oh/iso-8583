@@ -15,7 +15,7 @@ class EncodeTest extends TestCase
     {
         $byteMessage = '020070200000020000001641107600000000080000000000000068000001233030';
 
-        $this->assertEquals($byteMessage, iso8583_encode($this->fieldsData));
+        self::assertEquals($byteMessage, iso8583_encode($this->fieldsData));
     }
 
     public function testItCanEncodeAMessageWithCustomSpecification()
@@ -65,7 +65,7 @@ class EncodeTest extends TestCase
 
         $this->fieldsData[63] = 'Hello, world!';
 
-        $this->assertEquals($byteMessage, iso8583_encode($this->fieldsData, $settings));
+        self::assertEquals($byteMessage, iso8583_encode($this->fieldsData, $settings));
     }
 
     public function testItCanEncodeAMessageWithSecondBitmap()
@@ -75,7 +75,7 @@ class EncodeTest extends TestCase
         $this->fieldsData[25] = '81';
         $this->fieldsData[119] = 'Hello, world!';
 
-        $this->assertEquals($byteMessage, iso8583_encode($this->fieldsData));
+        self::assertEquals($byteMessage, iso8583_encode($this->fieldsData));
     }
 
     public function testItCanEncodeAMessageWithThirdBitmap()
@@ -96,7 +96,7 @@ class EncodeTest extends TestCase
         $this->fieldsData[119] = 'Hello, world!';
         $this->fieldsData[132] = '123456';
 
-        $this->assertEquals($byteMessage, iso8583_encode($this->fieldsData, $settings));
+        self::assertEquals($byteMessage, iso8583_encode($this->fieldsData, $settings));
     }
 
     public function testItCanEncodeWithCustomPaddingSetting()
@@ -127,7 +127,7 @@ class EncodeTest extends TestCase
         $this->fieldsData[2] = '411076000000008';
         $this->fieldsData[4] = '6800';
 
-        $this->assertEquals($byteMessage, iso8583_encode($this->fieldsData, $specification));
+        self::assertEquals($byteMessage, iso8583_encode($this->fieldsData, $specification));
     }
 
     public function testItCanEncodeWithCustomPaddingRightSetting()
@@ -150,7 +150,7 @@ class EncodeTest extends TestCase
 
         $this->fieldsData[2] = '411076000000008';
 
-        $this->assertEquals($byteMessage, iso8583_encode($this->fieldsData, $specification));
+        self::assertEquals($byteMessage, iso8583_encode($this->fieldsData, $specification));
     }
 
     /**

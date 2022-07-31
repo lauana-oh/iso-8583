@@ -13,7 +13,7 @@ class Specification
     public function __construct(array $settings)
     {
         $this->settings = ContainerHelper::getSpecificationResolver()->resolveSettings(
-            ContainerHelper::getSpecificationNormalizer()->normalizeSettings($settings)
+            ContainerHelper::getSpecificationNormalizer()->prepareSettings($settings)
         );
     }
 
@@ -39,9 +39,9 @@ class Specification
             ->setEncoder(ContainerHelper::getEncoder($fieldSettings['encode']['value']));
 
         $padding = ContainerHelper::getNewPadding()
-            ->setPadString($fieldSettings['padding']['value'] ?? null)
-            ->setPosition($fieldSettings['padding']['position'] ?? null)
-            ->setSize($fieldSettings['padding']['length'] ?? 0);
+            ->setPadString($fieldSettings['padding']['value'])
+            ->setPosition($fieldSettings['padding']['position'])
+            ->setSize($fieldSettings['padding']['length']);
 
         return ContainerHelper::getNewField()
             ->setComponents(compact('key', 'length', 'value'))

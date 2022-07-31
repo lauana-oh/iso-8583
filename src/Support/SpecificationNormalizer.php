@@ -15,7 +15,7 @@ class SpecificationNormalizer extends OptionsResolver implements SpecificationNo
         $this->defineFields();
     }
 
-    public function normalizeSettings(array $settings): array
+    public function prepareSettings(array $settings): array
     {
         return $this->resolve($settings);
     }

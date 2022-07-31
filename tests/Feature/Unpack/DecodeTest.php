@@ -16,7 +16,7 @@ class DecodeTest extends TestCase
     {
         $byteMessage = '020070200000020000001641107600000000080000000000000068000001233030';
 
-        $this->assertEquals($this->fieldsData, iso8583_decode($byteMessage));
+        self::assertEquals($this->fieldsData, iso8583_decode($byteMessage));
     }
 
     public function testItCanDecodeAMessageWithCustomSpecification()
@@ -65,7 +65,7 @@ class DecodeTest extends TestCase
 
         $this->fieldsData[63] = 'Hello, world!';
 
-        $this->assertEquals($this->fieldsData, iso8583_decode($byteMessage, $specification));
+        self::assertEquals($this->fieldsData, iso8583_decode($byteMessage, $specification));
     }
 
     public function testItCanDecodeAMessageWithSecondBitmap()
@@ -75,7 +75,7 @@ class DecodeTest extends TestCase
         $this->fieldsData[25] = '81';
         $this->fieldsData[119] = 'Hello, world!';
 
-        $this->assertEquals($this->fieldsData, iso8583_decode($byteMessage));
+        self::assertEquals($this->fieldsData, iso8583_decode($byteMessage));
     }
 
     public function testItCanDecodeAMessageWithThirdBitmap()
@@ -96,7 +96,7 @@ class DecodeTest extends TestCase
         $this->fieldsData[119] = 'Hello, world!';
         $this->fieldsData[132] = '123456';
 
-        $this->assertEquals($this->fieldsData, iso8583_decode($byteMessage, $settings));
+        self::assertEquals($this->fieldsData, iso8583_decode($byteMessage, $settings));
     }
 
     public function testItCanDecodeWithCustomPaddingSetting()
@@ -118,7 +118,7 @@ class DecodeTest extends TestCase
 
         $this->fieldsData[2] = '411076000000008';
 
-        $this->assertEquals($this->fieldsData, iso8583_decode($byteMessage, $specification));
+        self::assertEquals($this->fieldsData, iso8583_decode($byteMessage, $specification));
     }
 
     public function testItCanDecodeWithCustomPaddingRightSetting()
@@ -141,7 +141,7 @@ class DecodeTest extends TestCase
 
         $this->fieldsData[2] = '411076000000008';
 
-        $this->assertEquals($this->fieldsData, iso8583_decode($byteMessage, $specification));
+        self::assertEquals($this->fieldsData, iso8583_decode($byteMessage, $specification));
     }
 
     /**

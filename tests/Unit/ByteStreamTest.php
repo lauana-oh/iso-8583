@@ -11,8 +11,8 @@ class ByteStreamTest extends TestCase
     {
         $byteStream = new ByteStream('1234567890');
 
-        $this->assertEquals('1234', $byteStream->getAndMoveCursor(4));
-        $this->assertEquals('567890', $byteStream->getCurrentBytes());
+        self::assertEquals('1234', $byteStream->getAndMoveCursor(4));
+        self::assertEquals('567890', $byteStream->getCurrentBytes());
     }
 
     public function testItCanGetNewByteStreamAndMoveCursor()
@@ -21,9 +21,9 @@ class ByteStreamTest extends TestCase
 
         $newByteStream = $byteStream->getNewByteStreamAndMoveCursor(4);
 
-        $this->assertInstanceOf(ByteStream::class, $newByteStream);
-        $this->assertEquals('1234', $newByteStream->getCurrentBytes());
-        $this->assertEquals('567890', $byteStream->getCurrentBytes());
+        self::assertInstanceOf(ByteStream::class, $newByteStream);
+        self::assertEquals('1234', $newByteStream->getCurrentBytes());
+        self::assertEquals('567890', $byteStream->getCurrentBytes());
     }
 
     public function testItCanConcatMessage()
@@ -32,7 +32,7 @@ class ByteStreamTest extends TestCase
 
         $byteStream->concat('abc');
 
-        $this->assertEquals('1234567890abc', $byteStream->getCurrentBytes());
+        self::assertEquals('1234567890abc', $byteStream->getCurrentBytes());
     }
 
     public function testItCanPrependMessage()
@@ -41,14 +41,14 @@ class ByteStreamTest extends TestCase
 
         $byteStream->prepend('abc');
 
-        $this->assertEquals('abc1234567890', $byteStream->getCurrentBytes());
+        self::assertEquals('abc1234567890', $byteStream->getCurrentBytes());
     }
 
     public function testItCanUseAsAString()
     {
         $byteStream = new ByteStream('1234567890');
 
-        $this->assertEquals('1234567890', (string) $byteStream);
-        $this->assertEquals(10, strlen($byteStream));
+        self::assertEquals('1234567890', (string) $byteStream);
+        self::assertEquals(10, strlen($byteStream));
     }
 }

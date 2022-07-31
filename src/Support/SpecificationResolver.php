@@ -3,7 +3,9 @@
 namespace LauanaOh\Iso8583\Support;
 
 use LauanaOh\Iso8583\Contracts\SpecificationResolverContract;
+use LauanaOh\Iso8583\Entities\Padding;
 use LauanaOh\Iso8583\Helpers\ContainerHelper;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -66,9 +68,26 @@ class SpecificationResolver extends OptionsResolver implements SpecificationReso
 
                 $resolver->define('padding')
                     ->default(function (OptionsResolver $paddingResolver) {
-                        $paddingResolver->define('value')->allowedTypes('string');
-                        $paddingResolver->define('length')->allowedTypes('int');
-                        $paddingResolver->define('position')->allowedValues(STR_PAD_LEFT, STR_PAD_RIGHT);
+                        $paddingResolver->define('value')
+                            ->allowedTypes('string')
+                            ->default(Padding::DEFAULT_PAD_STRING);
+
+                        $paddingResolver->define('length')
+                            ->allowedTypes('int')
+                            ->default(0);
+
+                        $paddingResolver->define('position')
+                            ->allowedValues(function ($value) {
+                                if (in_array($value, [STR_PAD_LEFT, STR_PAD_RIGHT], true)) {
+                                    return true;
+                                }
+
+                                throw new InvalidOptionsException(sprintf(
+                                    'The option "fields[padding][position]" with value "%s" is invalid. Accepted values are: STR_PAD_LEFT (0), STR_PAD_RIGHT (1).',
+                                    $value
+                                ));
+                            })
+                            ->default(Padding::DEFAULT_POSITION);
                     });
             });
     }

@@ -4,5 +4,5 @@ namespace LauanaOh\Iso8583\Contract;
 
 interface SpecificationNormalizerContract
 {
-    public function normalizeSettings(array $settings): array;
+    public function prepareSettings(array $settings): array;
 }
