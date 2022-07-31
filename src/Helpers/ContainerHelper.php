@@ -6,12 +6,12 @@ use LauanaOh\Iso8583\Contracts\BitmapContract;
 use LauanaOh\Iso8583\Contracts\EncoderContract;
 use LauanaOh\Iso8583\Contracts\FieldContract;
 use LauanaOh\Iso8583\Contracts\Iso8583MessageContract;
+use LauanaOh\Iso8583\Contracts\LengthContract;
 use LauanaOh\Iso8583\Contracts\PaddingContract;
 use LauanaOh\Iso8583\Contracts\SpecificationNormalizerContract;
 use LauanaOh\Iso8583\Contracts\SpecificationResolverContract;
-use LauanaOh\Iso8583\Lengths\BaseLength;
-use LauanaOh\Iso8583\Tags\BaseTag;
-use LauanaOh\Iso8583\Types\BaseType;
+use LauanaOh\Iso8583\Contracts\TagContract;
+use LauanaOh\Iso8583\Contracts\TypeContract;
 
 class ContainerHelper
 {
@@ -55,12 +55,12 @@ class ContainerHelper
         return iso8583_container(SpecificationNormalizerContract::class);
     }
 
-    public static function getType(string $type): BaseType
+    public static function getType(string $type): TypeContract
     {
         return iso8583_container('type_'.$type);
     }
 
-    public static function getLength(string $length): BaseLength
+    public static function getLength(string $length): LengthContract
     {
         return iso8583_container('length_'.$length);
     }
@@ -70,7 +70,7 @@ class ContainerHelper
         return iso8583_container('encoder_'.$encoder);
     }
 
-    public static function getTag(string $tag): BaseTag
+    public static function getTag(string $tag): TagContract
     {
         return iso8583_container('tag_'.$tag);
     }

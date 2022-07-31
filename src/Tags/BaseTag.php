@@ -3,11 +3,11 @@
 namespace LauanaOh\Iso8583\Tags;
 
 use Closure;
-use LauanaOh\Iso8583\Contracts\PipeContract;
+use LauanaOh\Iso8583\Contracts\TagContract;
 use LauanaOh\Iso8583\Entities\ByteStream;
 use LauanaOh\Iso8583\Entities\DataHolder;
 
-abstract class BaseTag implements PipeContract
+abstract class BaseTag implements TagContract
 {
     protected string $value;
 
