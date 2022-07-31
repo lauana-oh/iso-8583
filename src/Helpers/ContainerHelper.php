@@ -2,12 +2,12 @@
 
 namespace LauanaOh\Iso8583\Helpers;
 
-use LauanaOh\Iso8583\Contract\SpecificationNormalizerContract;
 use LauanaOh\Iso8583\Contracts\BitmapContract;
 use LauanaOh\Iso8583\Contracts\EncoderContract;
 use LauanaOh\Iso8583\Contracts\FieldContract;
 use LauanaOh\Iso8583\Contracts\Iso8583MessageContract;
 use LauanaOh\Iso8583\Contracts\PaddingContract;
+use LauanaOh\Iso8583\Contracts\SpecificationNormalizerContract;
 use LauanaOh\Iso8583\Contracts\SpecificationResolverContract;
 use LauanaOh\Iso8583\Lengths\BaseLength;
 use LauanaOh\Iso8583\Tags\BaseTag;

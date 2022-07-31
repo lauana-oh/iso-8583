@@ -2,7 +2,7 @@
 
 namespace LauanaOh\Iso8583\Support;
 
-use LauanaOh\Iso8583\Contract\SpecificationNormalizerContract;
+use LauanaOh\Iso8583\Contracts\SpecificationNormalizerContract;
 use LauanaOh\Iso8583\Helpers\ContainerHelper;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;

@@ -11,11 +11,11 @@
 use LauanaOh\Iso8583\Constants\Encodes;
 use LauanaOh\Iso8583\Constants\Lengths;
 use LauanaOh\Iso8583\Constants\Types;
-use LauanaOh\Iso8583\Contract\SpecificationNormalizerContract;
 use LauanaOh\Iso8583\Contracts\BitmapContract;
 use LauanaOh\Iso8583\Contracts\FieldContract;
 use LauanaOh\Iso8583\Contracts\Iso8583MessageContract;
 use LauanaOh\Iso8583\Contracts\PaddingContract;
+use LauanaOh\Iso8583\Contracts\SpecificationNormalizerContract;
 use LauanaOh\Iso8583\Contracts\SpecificationResolverContract;
 use LauanaOh\Iso8583\Encoders\ASCII;
 use LauanaOh\Iso8583\Encoders\BCD;
