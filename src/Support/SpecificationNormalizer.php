@@ -35,14 +35,19 @@ class SpecificationNormalizer extends OptionsResolver implements SpecificationNo
                     $value = array_replace(ContainerHelper::getBaseSpecification(), $value);
                 }
 
-                return array_map(function ($data) {
-                    if (isset($data['encode']) && is_string($data['encode'])) {
-                        $encodes = explode(',', $data['encode']);
-                        $data['encode'] = array_map('trim', $encodes);
-                    }
-
-                    return $data;
-                }, $value);
+                return $this->normalizeEncode($value);
             });
+    }
+
+    protected function normalizeEncode($value): array
+    {
+        return array_map(function ($data) {
+            if (isset($data['encode']) && is_string($data['encode'])) {
+                $encodes = explode(',', $data['encode']);
+                $data['encode'] = array_map('trim', $encodes);
+            }
+
+            return $data;
+        }, $value);
     }
 }
