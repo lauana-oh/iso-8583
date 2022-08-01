@@ -3,7 +3,7 @@
 namespace LauanaOh\Iso8583\Helpers;
 
 use LauanaOh\Iso8583\Contracts\BitmapContract;
-use LauanaOh\Iso8583\Contracts\FieldBuilderFactoryContract;
+use LauanaOh\Iso8583\Contracts\FieldBuilderContract;
 use LauanaOh\Iso8583\Contracts\EncoderContract;
 use LauanaOh\Iso8583\Contracts\FieldContract;
 use LauanaOh\Iso8583\Contracts\Iso8583MessageContract;
@@ -31,9 +31,9 @@ class ContainerHelper
         return iso8583_container('base_specification');
     }
 
-    public static function getFieldBuilderFactory(): FieldBuilderFactoryContract
+    public static function getDefaultFieldBuilder(): FieldBuilderContract
     {
-        return iso8583_container(FieldBuilderFactoryContract::class);
+        return iso8583_container(FieldBuilderContract::class);
     }
 
     public static function getBitmap(): BitmapContract

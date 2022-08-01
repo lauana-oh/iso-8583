@@ -2,6 +2,7 @@
 
 namespace LauanaOh\Iso8583\Entities;
 
+use LauanaOh\Iso8583\Contracts\FieldBuilderContract;
 use LauanaOh\Iso8583\Contracts\PipeContract;
 use LauanaOh\Iso8583\Exceptions\InvalidFieldException;
 use LauanaOh\Iso8583\Helpers\ContainerHelper;
@@ -29,8 +30,11 @@ class Specification
 
         $fieldSettings = $this->settings['fields'][$field];
 
-        return ContainerHelper::getFieldBuilderFactory()
-            ->getFieldBuilder($fieldSettings)
-            ->createField($field, $fieldSettings);
+        return $this->getFieldBuilder()->createField($field, $fieldSettings);
+    }
+
+    protected function getFieldBuilder(): FieldBuilderContract
+    {
+        return ContainerHelper::getDefaultFieldBuilder();
     }
 }

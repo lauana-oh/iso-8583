@@ -6,7 +6,7 @@ use LauanaOh\Iso8583\Contracts\FieldBuilderContract;
 use LauanaOh\Iso8583\Contracts\FieldContract;
 use LauanaOh\Iso8583\Helpers\ContainerHelper;
 
-class SimpleFieldBuilder implements FieldBuilderContract
+class DefaultFieldBuilder implements FieldBuilderContract
 {
     public function createField(string $field, array $settings): FieldContract
     {
