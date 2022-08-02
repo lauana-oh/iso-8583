@@ -17,6 +17,7 @@ use LauanaOh\Iso8583\Contracts\FieldBuilderContract;
 use LauanaOh\Iso8583\Contracts\FieldContract;
 use LauanaOh\Iso8583\Contracts\Iso8583MessageContract;
 use LauanaOh\Iso8583\Contracts\PaddingContract;
+use LauanaOh\Iso8583\Contracts\SpecificationContract;
 use LauanaOh\Iso8583\Contracts\SpecificationNormalizerContract;
 use LauanaOh\Iso8583\Contracts\SpecificationResolverContract;
 use LauanaOh\Iso8583\Encoders\ASCII;
@@ -24,6 +25,7 @@ use LauanaOh\Iso8583\Encoders\BCD;
 use LauanaOh\Iso8583\Entities\Bitmap;
 use LauanaOh\Iso8583\Entities\Field;
 use LauanaOh\Iso8583\Entities\Padding;
+use LauanaOh\Iso8583\Entities\Specification;
 use LauanaOh\Iso8583\Iso8583Message;
 use LauanaOh\Iso8583\Lengths\Fixed;
 use LauanaOh\Iso8583\Lengths\LLLVAR;
@@ -65,6 +67,7 @@ $container[FieldBuilderContract::class] = fn () => new DefaultFieldBuilder();
 */
 
 $container['base_specification'] = fn () => require 'base_specification.php';
+$container[SpecificationContract::class] = fn () => new Specification();
 $container[SpecificationResolverContract::class] = fn () => new SpecificationResolver();
 $container[SpecificationNormalizerContract::class] = fn () => new SpecificationNormalizer();
 

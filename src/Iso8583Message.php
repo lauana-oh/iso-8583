@@ -6,6 +6,7 @@ use LauanaOh\Iso8583\Contracts\Iso8583MessageContract;
 use LauanaOh\Iso8583\Entities\ByteStream;
 use LauanaOh\Iso8583\Entities\DataHolder;
 use LauanaOh\Iso8583\Entities\Specification;
+use LauanaOh\Iso8583\Helpers\ContainerHelper;
 use LauanaOh\Iso8583\Support\Pipeline;
 
 class Iso8583Message implements Iso8583MessageContract
@@ -19,7 +20,7 @@ class Iso8583Message implements Iso8583MessageContract
 
     public function setSpecification(array $settings): self
     {
-        $this->specification = new Specification($settings);
+        $this->specification = ContainerHelper::loadSpecification($settings);
 
         return $this;
     }

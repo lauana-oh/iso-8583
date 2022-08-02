@@ -8,6 +8,7 @@ use LauanaOh\Iso8583\Contracts\Iso8583MessageContract;
 use LauanaOh\Iso8583\Encoders\ASCII;
 use LauanaOh\Iso8583\Entities\Field;
 use LauanaOh\Iso8583\Entities\Padding;
+use LauanaOh\Iso8583\Entities\Specification;
 use LauanaOh\Iso8583\Exceptions\ContainerException;
 use LauanaOh\Iso8583\Helpers\ContainerHelper;
 use LauanaOh\Iso8583\Iso8583Message;
@@ -62,6 +63,23 @@ class ContainerHelperTest extends TestCase
     public function testItCanGetNewPadding()
     {
         self::assertInstanceOf(Padding::class, ContainerHelper::getNewPadding());
+    }
+
+    public function testItCanLoadSpecification()
+    {
+        $settings = [
+            'fields' => [
+                2 => [
+                    'type' => 'n',
+                    'length' => 4,
+                    'encode' => 'bcd',
+                ],
+            ]
+        ];
+
+        self::assertInstanceOf(Specification::class, ContainerHelper::loadSpecification($settings));
+        self::assertFalse(ContainerHelper::loadSpecification($settings)->toArray()['override']);
+        self::assertArrayHasKey(2, ContainerHelper::loadSpecification($settings)->toArray()['fields']);
     }
 
     public function testItCanGetSpecificationResolver()

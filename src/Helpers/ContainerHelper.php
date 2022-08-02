@@ -9,6 +9,7 @@ use LauanaOh\Iso8583\Contracts\FieldContract;
 use LauanaOh\Iso8583\Contracts\Iso8583MessageContract;
 use LauanaOh\Iso8583\Contracts\LengthContract;
 use LauanaOh\Iso8583\Contracts\PaddingContract;
+use LauanaOh\Iso8583\Contracts\SpecificationContract;
 use LauanaOh\Iso8583\Contracts\SpecificationNormalizerContract;
 use LauanaOh\Iso8583\Contracts\SpecificationResolverContract;
 use LauanaOh\Iso8583\Contracts\TagContract;
@@ -55,6 +56,11 @@ class ContainerHelper
     public static function getNewPadding(): PaddingContract
     {
         return iso8583_container(PaddingContract::class);
+    }
+
+    public static function loadSpecification(array $settings = []): SpecificationContract
+    {
+        return iso8583_container(SpecificationContract::class)->loadSettings($settings);
     }
 
     public static function getSpecificationResolver(): SpecificationResolverContract
