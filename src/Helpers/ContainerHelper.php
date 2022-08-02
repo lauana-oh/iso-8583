@@ -90,6 +90,7 @@ class ContainerHelper
     public static function set(string $key, $value)
     {
         unset(iso8583_container()[$key]);
+
         return iso8583_container()[$key] = $value;
     }
 
@@ -113,7 +114,7 @@ class ContainerHelper
 
     public static function setType(string $type, string $implementation)
     {
-        if (!in_array(TypeContract::class, class_implements($implementation), true)) {
+        if (! in_array(TypeContract::class, class_implements($implementation), true)) {
             throw ContainerException::invalidType($type, $implementation);
         }
 
@@ -122,7 +123,7 @@ class ContainerHelper
 
     public static function setEncoder(string $type, string $implementation)
     {
-        if (!in_array(EncoderContract::class, class_implements($implementation), true)) {
+        if (! in_array(EncoderContract::class, class_implements($implementation), true)) {
             throw ContainerException::invalidEncoder($type, $implementation);
         }
 
@@ -131,7 +132,7 @@ class ContainerHelper
 
     public static function setLength(string $type, string $implementation)
     {
-        if (!in_array(LengthContract::class, class_implements($implementation), true)) {
+        if (! in_array(LengthContract::class, class_implements($implementation), true)) {
             throw ContainerException::invalidLength($type, $implementation);
         }
 
