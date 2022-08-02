@@ -74,7 +74,7 @@ class ContainerHelperTest extends TestCase
                     'length' => 4,
                     'encode' => 'bcd',
                 ],
-            ]
+            ],
         ];
 
         self::assertInstanceOf(Specification::class, ContainerHelper::loadSpecification($settings));
