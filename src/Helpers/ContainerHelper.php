@@ -13,12 +13,18 @@ use LauanaOh\Iso8583\Contracts\SpecificationNormalizerContract;
 use LauanaOh\Iso8583\Contracts\SpecificationResolverContract;
 use LauanaOh\Iso8583\Contracts\TagContract;
 use LauanaOh\Iso8583\Contracts\TypeContract;
+use LauanaOh\Iso8583\Exceptions\ContainerException;
 
 class ContainerHelper
 {
     public static function isDefined(string $key): bool
     {
         return iso8583_container()->offsetExists($key);
+    }
+
+    public static function get(string $key)
+    {
+        return iso8583_container($key);
     }
 
     public static function getIso8583Message(): Iso8583MessageContract
@@ -79,5 +85,56 @@ class ContainerHelper
     public static function getTag(string $tag): TagContract
     {
         return iso8583_container('tag_'.$tag);
+    }
+
+    public static function set(string $key, $value)
+    {
+        unset(iso8583_container()[$key]);
+        return iso8583_container()[$key] = $value;
+    }
+
+    public static function singleton(string $key, string $implementation)
+    {
+        unset(iso8583_container()[$key]);
+        iso8583_container()[$key] = fn () => new $implementation;
+
+        return iso8583_container($key);
+    }
+
+    public static function bind(string $key, string $implementation)
+    {
+        $container = iso8583_container();
+
+        unset($container[$key]);
+        $container[$key] = $container->factory(fn () => new $implementation);
+
+        return iso8583_container($key);
+    }
+
+    public static function setType(string $type, string $implementation)
+    {
+        if (!in_array(TypeContract::class, class_implements($implementation), true)) {
+            throw ContainerException::invalidType($type, $implementation);
+        }
+
+        return self::bind('type_'.$type, $implementation);
+    }
+
+    public static function setEncoder(string $type, string $implementation)
+    {
+        if (!in_array(EncoderContract::class, class_implements($implementation), true)) {
+            throw ContainerException::invalidEncoder($type, $implementation);
+        }
+
+        return self::bind('encoder_'.$type, $implementation);
+    }
+
+    public static function setLength(string $type, string $implementation)
+    {
+        if (!in_array(LengthContract::class, class_implements($implementation), true)) {
+            throw ContainerException::invalidLength($type, $implementation);
+        }
+
+        return self::bind('length_'.strlen($type), $implementation);
     }
 }
