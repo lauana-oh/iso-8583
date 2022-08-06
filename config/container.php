@@ -76,12 +76,12 @@ $container[SpecificationContract::class] = fn () => new Specification();
 $container[SpecificationResolverContract::class] = fn () => new SpecificationResolver();
 $container[SpecificationParserContract::class] = fn () => new SpecificationParser();
 
-$container[TypeValidation::class] = fn() => new TypeValidation();
-$container[EncodeValidation::class] = fn() => new EncodeValidation();
-$container[PaddingPositionValidation::class] = fn() => new PaddingPositionValidation();
+$container[TypeValidation::class] = fn () => new TypeValidation();
+$container[EncodeValidation::class] = fn () => new EncodeValidation();
+$container[PaddingPositionValidation::class] = fn () => new PaddingPositionValidation();
 
-$container[TypeNormalizer::class] = fn() => new TypeNormalizer();
-$container[EncodeNormalizer::class] = fn() => new EncodeNormalizer();
+$container[TypeNormalizer::class] = fn () => new TypeNormalizer();
+$container[EncodeNormalizer::class] = fn () => new EncodeNormalizer();
 
 /*
 |--------------------------------------------------------------------------

@@ -10,7 +10,7 @@ class TypeNormalizer implements NormalizerContract
 {
     public function createCallable(): Closure
     {
-        return static function(Options $options, $value) {
+        return static function (Options $options, $value) {
             $value = str_replace('.', '', $value, $length);
 
             return compact('value', 'length');
