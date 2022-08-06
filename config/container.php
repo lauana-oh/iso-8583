@@ -153,5 +153,5 @@ $container['length_'.strlen(Length::TYPE_LLLVAR)] = $container->factory(fn () =>
 | package.
 */
 
-$container['tag_'. Tag::TYPE_INVISIBLE] = $container->factory(fn () => new Invisible());
-$container['tag_'. Tag::TYPE_VISIBLE] = $container->factory(fn () => new Visible());
+$container['tag_'.Tag::TYPE_INVISIBLE] = $container->factory(fn () => new Invisible());
+$container['tag_'.Tag::TYPE_VISIBLE] = $container->factory(fn () => new Visible());

@@ -19,7 +19,8 @@ class DefaultFieldBuilder implements FieldBuilderContract
             $this->getTagPipe($field, $settings),
             $this->getLengthPipe($settings),
             $this->getValuePipe($settings),
-            $this->getPadding($settings['padding']));
+            $this->getPadding($settings['padding'])
+        );
     }
 
     protected function buildField(TagContract $key, LengthContract $length, TypeContract $value, PaddingContract $padding): FieldContract
