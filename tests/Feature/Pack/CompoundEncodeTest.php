@@ -13,7 +13,7 @@ class CompoundEncodeTest extends TestCase
 
         $this->fieldsData[63] = [
             'totalSales' => '02',
-            'totalSalesAmount' => '000000100000'
+            'totalSalesAmount' => '000000100000',
         ];
 
         $specification['fields'] = [
@@ -48,7 +48,7 @@ class CompoundEncodeTest extends TestCase
 
         $this->fieldsData[63] = [
             'totalSales' => '02',
-            'totalSalesAmount' => '000000100000'
+            'totalSalesAmount' => '000000100000',
         ];
 
         $specification['fields'] = [

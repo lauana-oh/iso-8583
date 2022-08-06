@@ -11,7 +11,7 @@ class BuilderValidation implements ValidationContract
     public function createCallable(): Closure
     {
         return static function ($value) {
-            if (!in_array(FieldBuilderContract::class, class_implements($value), true)) {
+            if (! in_array(FieldBuilderContract::class, class_implements($value), true)) {
                 throw new \Exception();
             }
 

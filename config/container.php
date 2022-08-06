@@ -116,7 +116,7 @@ $container['type_'.Types::TYPE_NUMERIC] = $container->factory(fn () => new Numer
 $container['type_'.Types::TYPE_NUMERIC_SPECIAL_CHAR] = $container->factory(fn () => new NumericSpecialCharacter());
 $container['type_'.Types::TYPE_SPECIAL_CHAR] = $container->factory(fn () => new SpecialCharacter());
 
-$container['type_compound_'. Types::TYPE_COMPOUND_FIXED] = $container->factory(fn () => new FixedCompound());
+$container['type_compound_'.Types::TYPE_COMPOUND_FIXED] = $container->factory(fn () => new FixedCompound());
 
 /*
 |--------------------------------------------------------------------------

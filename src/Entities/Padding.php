@@ -62,7 +62,7 @@ class Padding implements PaddingContract
         return $this->size;
     }
 
-    public function setForced(bool $forced): Padding
+    public function setForced(bool $forced): self
     {
         $this->forced = $forced;
 

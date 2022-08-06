@@ -12,7 +12,7 @@ class BCD implements EncoderContract
     {
         $padding ??= ContainerHelper::getNewPadding();
 
-        if (!$padding->getSize() && strlen($data) % 2 !== 0) {
+        if (! $padding->getSize() && strlen($data) % 2 !== 0) {
             $padding->setForced(true)->setSize(strlen($data) + 1);
         }
 
