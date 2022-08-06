@@ -5,7 +5,9 @@ namespace LauanaOh\Iso8583\Support;
 use LauanaOh\Iso8583\Contracts\SpecificationResolverContract;
 use LauanaOh\Iso8583\Entities\Padding;
 use LauanaOh\Iso8583\Helpers\ContainerHelper;
-use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use LauanaOh\Iso8583\Validations\PaddingPositionValidation;
+use LauanaOh\Iso8583\Validations\EncodeValidation;
+use LauanaOh\Iso8583\Validations\TypeValidation;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -45,12 +47,9 @@ class SpecificationResolver extends OptionsResolver implements SpecificationReso
         $resolver->define('type')
             ->required()
             ->allowedTypes('string')
-            ->allowedValues(function ($value) {
-                $type = str_replace('.', '', $value, $length);
-
-                return ContainerHelper::isDefined('type_'.$type)
-                    && ContainerHelper::isDefined('length_'.$length);
-            })->normalize(function (Options $options, $value) {
+            ->allowedValues(
+                ContainerHelper::getSpecificationValidation(TypeValidation::class)->createIsValidCallable()
+            )->normalize(function (Options $options, $value) {
                 $value = str_replace('.', '', $value, $length);
 
                 return compact('value', 'length');
@@ -69,14 +68,9 @@ class SpecificationResolver extends OptionsResolver implements SpecificationReso
         $resolver->define('encode')
             ->required()
             ->allowedTypes('string[]')
-            ->allowedValues(function ($encodes) {
-                return empty(
-                    array_filter(
-                        $encodes,
-                        fn ($value) => ! ContainerHelper::isDefined('encoder_'.$value)
-                    )
-                );
-            })->normalize(function (Options $options, $encodes) {
+            ->allowedValues(
+                ContainerHelper::getSpecificationValidation(EncodeValidation::class)->createIsValidCallable()
+            )->normalize(function (Options $options, $encodes) {
                 return [
                     'value' => $encodes[1] ?? $encodes[0],
                     'length' => $encodes[0],
@@ -97,19 +91,10 @@ class SpecificationResolver extends OptionsResolver implements SpecificationReso
                     ->default(0);
 
                 $paddingResolver->define('position')
-                    ->allowedValues(function ($value) {
-                        if (in_array($value, [STR_PAD_LEFT, STR_PAD_RIGHT], true)) {
-                            return true;
-                        }
-
-                        throw new InvalidOptionsException(
-                            sprintf(
-                                'The option "fields[padding][position]" with value "%s" is invalid. Accepted values are: STR_PAD_LEFT (0), STR_PAD_RIGHT (1).',
-                                $value
-                            )
-                        );
-                    })
-                    ->default(Padding::DEFAULT_POSITION);
+                    ->allowedValues(
+                        ContainerHelper::getSpecificationValidation(PaddingPositionValidation::class)
+                            ->createIsValidCallable()
+                    )->default(Padding::DEFAULT_POSITION);
             });
     }
 }

@@ -12,6 +12,7 @@ use LauanaOh\Iso8583\Contracts\PaddingContract;
 use LauanaOh\Iso8583\Contracts\SpecificationContract;
 use LauanaOh\Iso8583\Contracts\SpecificationNormalizerContract;
 use LauanaOh\Iso8583\Contracts\SpecificationResolverContract;
+use LauanaOh\Iso8583\Contracts\ValidationContract;
 use LauanaOh\Iso8583\Contracts\TagContract;
 use LauanaOh\Iso8583\Contracts\TypeContract;
 use LauanaOh\Iso8583\Exceptions\ContainerException;
@@ -71,6 +72,11 @@ class ContainerHelper
     public static function getSpecificationNormalizer(): SpecificationNormalizerContract
     {
         return iso8583_container(SpecificationNormalizerContract::class);
+    }
+
+    public static function getSpecificationValidation(string $validation): ValidationContract
+    {
+        return iso8583_container($validation);
     }
 
     public static function getType(string $type): TypeContract

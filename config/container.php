@@ -41,6 +41,9 @@ use LauanaOh\Iso8583\Types\Binary;
 use LauanaOh\Iso8583\Types\Numeric;
 use LauanaOh\Iso8583\Types\NumericSpecialCharacter;
 use LauanaOh\Iso8583\Types\SpecialCharacter;
+use LauanaOh\Iso8583\Validations\PaddingPositionValidation;
+use LauanaOh\Iso8583\Validations\EncodeValidation;
+use LauanaOh\Iso8583\Validations\TypeValidation;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +73,10 @@ $container['base_specification'] = fn () => require 'base_specification.php';
 $container[SpecificationContract::class] = fn () => new Specification();
 $container[SpecificationResolverContract::class] = fn () => new SpecificationResolver();
 $container[SpecificationNormalizerContract::class] = fn () => new SpecificationNormalizer();
+
+$container[TypeValidation::class] = fn() => new TypeValidation();
+$container[EncodeValidation::class] = fn() => new EncodeValidation();
+$container[PaddingPositionValidation::class] = fn() => new PaddingPositionValidation();
 
 /*
 |--------------------------------------------------------------------------
