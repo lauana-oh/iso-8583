@@ -2,7 +2,7 @@
 
 namespace LauanaOh\Iso8583\Constants;
 
-class Types
+class FieldType
 {
     public const TYPE_ALPHA = 'a';
     public const TYPE_ALPHANUMERIC = 'an';

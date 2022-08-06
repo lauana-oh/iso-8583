@@ -2,11 +2,11 @@
 
 namespace LauanaOh\Iso8583\Types;
 
-use LauanaOh\Iso8583\Constants\Types;
+use LauanaOh\Iso8583\Constants\FieldType;
 
 class NumericSpecialCharacter extends BaseType
 {
-    protected const TYPE = Types::TYPE_NUMERIC_SPECIAL_CHAR;
+    protected const TYPE = FieldType::TYPE_NUMERIC_SPECIAL_CHAR;
 
     public function isValid(string $value): bool
     {

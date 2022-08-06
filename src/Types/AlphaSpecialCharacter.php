@@ -2,11 +2,11 @@
 
 namespace LauanaOh\Iso8583\Types;
 
-use LauanaOh\Iso8583\Constants\Types;
+use LauanaOh\Iso8583\Constants\FieldType;
 
 class AlphaSpecialCharacter extends BaseType
 {
-    protected const TYPE = Types::TYPE_ALPHA_SPECIAL_CHAR;
+    protected const TYPE = FieldType::TYPE_ALPHA_SPECIAL_CHAR;
 
     public function isValid(string $value): bool
     {

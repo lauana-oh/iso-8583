@@ -2,11 +2,11 @@
 
 namespace LauanaOh\Iso8583\Types;
 
-use LauanaOh\Iso8583\Constants\Types;
+use LauanaOh\Iso8583\Constants\FieldType;
 
 class SpecialCharacter extends BaseType
 {
-    protected const TYPE = Types::TYPE_SPECIAL_CHAR;
+    protected const TYPE = FieldType::TYPE_SPECIAL_CHAR;
 
     public const VALID_CHARACTERS = [
         '!',

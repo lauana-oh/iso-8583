@@ -9,9 +9,9 @@
 */
 
 use LauanaOh\Iso8583\Builders\DefaultFieldBuilder;
-use LauanaOh\Iso8583\Constants\Encodes;
-use LauanaOh\Iso8583\Constants\Lengths;
-use LauanaOh\Iso8583\Constants\Types;
+use LauanaOh\Iso8583\Constants\Encode;
+use LauanaOh\Iso8583\Constants\Length;
+use LauanaOh\Iso8583\Constants\FieldType;
 use LauanaOh\Iso8583\Contracts\BitmapContract;
 use LauanaOh\Iso8583\Contracts\FieldBuilderContract;
 use LauanaOh\Iso8583\Contracts\FieldContract;
@@ -95,8 +95,8 @@ $container[EncodeNormalizer::class] = fn () => new EncodeNormalizer();
 | package.
 */
 
-$container['encoder_'.Encodes::TYPE_BCD] = fn () => new BCD();
-$container['encoder_'.Encodes::TYPE_ASCII] = fn () => new ASCII();
+$container['encoder_'.Encode::TYPE_BCD] = fn () => new BCD();
+$container['encoder_'.Encode::TYPE_ASCII] = fn () => new ASCII();
 
 /*
 |--------------------------------------------------------------------------
@@ -107,16 +107,16 @@ $container['encoder_'.Encodes::TYPE_ASCII] = fn () => new ASCII();
 | package.
 */
 
-$container['type_'.Types::TYPE_ALPHA] = $container->factory(fn () => new Alpha());
-$container['type_'.Types::TYPE_ALPHANUMERIC] = $container->factory(fn () => new AlphaNumeric());
-$container['type_'.Types::TYPE_ALPHANUMERIC_SPECIAL_CHAR] = $container->factory(fn () => new AlphaNumericSpecialCharacter());
-$container['type_'.Types::TYPE_ALPHA_SPECIAL_CHAR] = $container->factory(fn () => new AlphaSpecialCharacter());
-$container['type_'.Types::TYPE_BINARY] = $container->factory(fn () => new Binary());
-$container['type_'.Types::TYPE_NUMERIC] = $container->factory(fn () => new Numeric());
-$container['type_'.Types::TYPE_NUMERIC_SPECIAL_CHAR] = $container->factory(fn () => new NumericSpecialCharacter());
-$container['type_'.Types::TYPE_SPECIAL_CHAR] = $container->factory(fn () => new SpecialCharacter());
+$container['type_'.FieldType::TYPE_ALPHA] = $container->factory(fn () => new Alpha());
+$container['type_'.FieldType::TYPE_ALPHANUMERIC] = $container->factory(fn () => new AlphaNumeric());
+$container['type_'.FieldType::TYPE_ALPHANUMERIC_SPECIAL_CHAR] = $container->factory(fn () => new AlphaNumericSpecialCharacter());
+$container['type_'.FieldType::TYPE_ALPHA_SPECIAL_CHAR] = $container->factory(fn () => new AlphaSpecialCharacter());
+$container['type_'.FieldType::TYPE_BINARY] = $container->factory(fn () => new Binary());
+$container['type_'.FieldType::TYPE_NUMERIC] = $container->factory(fn () => new Numeric());
+$container['type_'.FieldType::TYPE_NUMERIC_SPECIAL_CHAR] = $container->factory(fn () => new NumericSpecialCharacter());
+$container['type_'.FieldType::TYPE_SPECIAL_CHAR] = $container->factory(fn () => new SpecialCharacter());
 
-$container['type_compound_'.Types::TYPE_COMPOUND_FIXED] = $container->factory(fn () => new FixedCompound());
+$container['type_compound_'.FieldType::TYPE_COMPOUND_FIXED] = $container->factory(fn () => new FixedCompound());
 
 /*
 |--------------------------------------------------------------------------
@@ -127,9 +127,9 @@ $container['type_compound_'.Types::TYPE_COMPOUND_FIXED] = $container->factory(fn
 | package.
 */
 
-$container['length_'.strlen(Lengths::TYPE_FIXED)] = $container->factory(fn () => new Fixed());
-$container['length_'.strlen(Lengths::TYPE_LLVAR)] = $container->factory(fn () => new LLVAR());
-$container['length_'.strlen(Lengths::TYPE_LLLVAR)] = $container->factory(fn () => new LLLVAR());
+$container['length_'.strlen(Length::TYPE_FIXED)] = $container->factory(fn () => new Fixed());
+$container['length_'.strlen(Length::TYPE_LLVAR)] = $container->factory(fn () => new LLVAR());
+$container['length_'.strlen(Length::TYPE_LLLVAR)] = $container->factory(fn () => new LLLVAR());
 
 /*
 |--------------------------------------------------------------------------

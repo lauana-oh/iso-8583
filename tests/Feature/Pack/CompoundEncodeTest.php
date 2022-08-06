@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Pack;
 
-use LauanaOh\Iso8583\Builders\FixedCompoundBuilder;
+use LauanaOh\Iso8583\Builders\CompoundBuilder;
 use Tests\TestCase;
 
 class CompoundEncodeTest extends TestCase
@@ -22,7 +22,7 @@ class CompoundEncodeTest extends TestCase
                 'encode' => 'bcd, ascii',
                 'length' => 14,
                 'compound' => [
-                    'builder' => FixedCompoundBuilder::class,
+                    'builder' => CompoundBuilder::class,
                     'fields' => [
                         'totalSales' => [
                             'type' => 'n',
@@ -57,7 +57,7 @@ class CompoundEncodeTest extends TestCase
                 'encode' => 'bcd, ascii',
                 'length' => 99,
                 'compound' => [
-                    'builder' => FixedCompoundBuilder::class,
+                    'builder' => CompoundBuilder::class,
                     'fields' => [
                         'totalSales' => [
                             'type' => 'n..',

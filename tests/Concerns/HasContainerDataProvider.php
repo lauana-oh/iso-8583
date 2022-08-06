@@ -2,9 +2,9 @@
 
 namespace Tests\Concerns;
 
-use LauanaOh\Iso8583\Constants\Encodes;
-use LauanaOh\Iso8583\Constants\Lengths;
-use LauanaOh\Iso8583\Constants\Types;
+use LauanaOh\Iso8583\Constants\Encode;
+use LauanaOh\Iso8583\Constants\Length;
+use LauanaOh\Iso8583\Constants\FieldType;
 use LauanaOh\Iso8583\Encoders\ASCII;
 use LauanaOh\Iso8583\Encoders\BCD;
 use LauanaOh\Iso8583\Lengths\Fixed;
@@ -24,36 +24,36 @@ trait HasContainerDataProvider
     public function dataTypes(): array
     {
         return [
-            Types::TYPE_BINARY => [
-                Types::TYPE_BINARY,
+            FieldType::TYPE_BINARY => [
+                FieldType::TYPE_BINARY,
                 Binary::class,
             ],
-            Types::TYPE_ALPHA => [
-                Types::TYPE_ALPHA,
+            FieldType::TYPE_ALPHA => [
+                FieldType::TYPE_ALPHA,
                 Alpha::class,
             ],
-            Types::TYPE_ALPHANUMERIC => [
-                Types::TYPE_ALPHANUMERIC,
+            FieldType::TYPE_ALPHANUMERIC => [
+                FieldType::TYPE_ALPHANUMERIC,
                 AlphaNumeric::class,
             ],
-            Types::TYPE_NUMERIC => [
-                Types::TYPE_NUMERIC,
+            FieldType::TYPE_NUMERIC => [
+                FieldType::TYPE_NUMERIC,
                 Numeric::class,
             ],
-            Types::TYPE_SPECIAL_CHAR => [
-                Types::TYPE_SPECIAL_CHAR,
+            FieldType::TYPE_SPECIAL_CHAR => [
+                FieldType::TYPE_SPECIAL_CHAR,
                 SpecialCharacter::class,
             ],
-            Types::TYPE_NUMERIC_SPECIAL_CHAR => [
-                Types::TYPE_NUMERIC_SPECIAL_CHAR,
+            FieldType::TYPE_NUMERIC_SPECIAL_CHAR => [
+                FieldType::TYPE_NUMERIC_SPECIAL_CHAR,
                 NumericSpecialCharacter::class,
             ],
-            Types::TYPE_ALPHA_SPECIAL_CHAR => [
-                Types::TYPE_ALPHA_SPECIAL_CHAR,
+            FieldType::TYPE_ALPHA_SPECIAL_CHAR => [
+                FieldType::TYPE_ALPHA_SPECIAL_CHAR,
                 AlphaSpecialCharacter::class,
             ],
-            Types::TYPE_ALPHANUMERIC_SPECIAL_CHAR => [
-                Types::TYPE_ALPHANUMERIC_SPECIAL_CHAR,
+            FieldType::TYPE_ALPHANUMERIC_SPECIAL_CHAR => [
+                FieldType::TYPE_ALPHANUMERIC_SPECIAL_CHAR,
                 AlphaNumericSpecialCharacter::class,
             ],
         ];
@@ -63,15 +63,15 @@ trait HasContainerDataProvider
     {
         return [
             'fixed' => [
-                Lengths::TYPE_FIXED,
+                Length::TYPE_FIXED,
                 Fixed::class,
             ],
             'llvar' => [
-                Lengths::TYPE_LLVAR,
+                Length::TYPE_LLVAR,
                 LLVAR::class,
             ],
             'lllvar' => [
-                Lengths::TYPE_LLLVAR,
+                Length::TYPE_LLLVAR,
                 LLLVAR::class,
             ],
         ];
@@ -80,12 +80,12 @@ trait HasContainerDataProvider
     public function encoders(): array
     {
         return [
-            Encodes::TYPE_BCD => [
-                Encodes::TYPE_BCD,
+            Encode::TYPE_BCD => [
+                Encode::TYPE_BCD,
                 BCD::class,
             ],
-            Encodes::TYPE_ASCII => [
-                Encodes::TYPE_ASCII,
+            Encode::TYPE_ASCII => [
+                Encode::TYPE_ASCII,
                 ASCII::class,
             ],
         ];
