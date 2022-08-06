@@ -8,7 +8,7 @@ use LauanaOh\Iso8583\Helpers\ContainerHelper;
 
 class TypeValidation implements ValidationContract
 {
-    public function createIsValidCallable(): Closure
+    public function createCallable(): Closure
     {
         return static function ($value) {
             $type = str_replace('.', '', $value, $length);

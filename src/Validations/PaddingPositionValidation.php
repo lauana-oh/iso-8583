@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 
 class PaddingPositionValidation implements ValidationContract
 {
-    public function createIsValidCallable(): Closure
+    public function createCallable(): Closure
     {
         return static function ($value) {
             if (in_array($value, [STR_PAD_LEFT, STR_PAD_RIGHT], true)) {

@@ -2,12 +2,12 @@
 
 namespace LauanaOh\Iso8583\Support;
 
-use LauanaOh\Iso8583\Contracts\SpecificationNormalizerContract;
+use LauanaOh\Iso8583\Contracts\SpecificationParserContract;
 use LauanaOh\Iso8583\Helpers\ContainerHelper;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SpecificationNormalizer extends OptionsResolver implements SpecificationNormalizerContract
+class SpecificationParser extends OptionsResolver implements SpecificationParserContract
 {
     public function __construct()
     {

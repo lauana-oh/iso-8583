@@ -4,7 +4,7 @@ namespace LauanaOh\Iso8583\Contracts;
 
 use Closure;
 
-interface ValidationContract
+interface NormalizerContract
 {
     public function createCallable(): Closure;
 }

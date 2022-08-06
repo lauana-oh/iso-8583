@@ -8,7 +8,7 @@ use LauanaOh\Iso8583\Helpers\ContainerHelper;
 
 class EncodeValidation implements ValidationContract
 {
-    public function createIsValidCallable(): Closure
+    public function createCallable(): Closure
     {
         return static function ($encodes) {
             return empty(array_filter(

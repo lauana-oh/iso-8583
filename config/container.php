@@ -18,7 +18,7 @@ use LauanaOh\Iso8583\Contracts\FieldContract;
 use LauanaOh\Iso8583\Contracts\Iso8583MessageContract;
 use LauanaOh\Iso8583\Contracts\PaddingContract;
 use LauanaOh\Iso8583\Contracts\SpecificationContract;
-use LauanaOh\Iso8583\Contracts\SpecificationNormalizerContract;
+use LauanaOh\Iso8583\Contracts\SpecificationParserContract;
 use LauanaOh\Iso8583\Contracts\SpecificationResolverContract;
 use LauanaOh\Iso8583\Encoders\ASCII;
 use LauanaOh\Iso8583\Encoders\BCD;
@@ -30,7 +30,9 @@ use LauanaOh\Iso8583\Iso8583Message;
 use LauanaOh\Iso8583\Lengths\Fixed;
 use LauanaOh\Iso8583\Lengths\LLLVAR;
 use LauanaOh\Iso8583\Lengths\LLVAR;
-use LauanaOh\Iso8583\Support\SpecificationNormalizer;
+use LauanaOh\Iso8583\Normalizers\EncodeNormalizer;
+use LauanaOh\Iso8583\Normalizers\TypeNormalizer;
+use LauanaOh\Iso8583\Support\SpecificationParser;
 use LauanaOh\Iso8583\Support\SpecificationResolver;
 use LauanaOh\Iso8583\Tags\Invisible;
 use LauanaOh\Iso8583\Types\Alpha;
@@ -72,11 +74,14 @@ $container[FieldBuilderContract::class] = fn () => new DefaultFieldBuilder();
 $container['base_specification'] = fn () => require 'base_specification.php';
 $container[SpecificationContract::class] = fn () => new Specification();
 $container[SpecificationResolverContract::class] = fn () => new SpecificationResolver();
-$container[SpecificationNormalizerContract::class] = fn () => new SpecificationNormalizer();
+$container[SpecificationParserContract::class] = fn () => new SpecificationParser();
 
 $container[TypeValidation::class] = fn() => new TypeValidation();
 $container[EncodeValidation::class] = fn() => new EncodeValidation();
 $container[PaddingPositionValidation::class] = fn() => new PaddingPositionValidation();
+
+$container[TypeNormalizer::class] = fn() => new TypeNormalizer();
+$container[EncodeNormalizer::class] = fn() => new EncodeNormalizer();
 
 /*
 |--------------------------------------------------------------------------

@@ -5,10 +5,11 @@ namespace LauanaOh\Iso8583\Support;
 use LauanaOh\Iso8583\Contracts\SpecificationResolverContract;
 use LauanaOh\Iso8583\Entities\Padding;
 use LauanaOh\Iso8583\Helpers\ContainerHelper;
+use LauanaOh\Iso8583\Normalizers\EncodeNormalizer;
+use LauanaOh\Iso8583\Normalizers\TypeNormalizer;
 use LauanaOh\Iso8583\Validations\PaddingPositionValidation;
 use LauanaOh\Iso8583\Validations\EncodeValidation;
 use LauanaOh\Iso8583\Validations\TypeValidation;
-use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SpecificationResolver extends OptionsResolver implements SpecificationResolverContract
@@ -47,13 +48,8 @@ class SpecificationResolver extends OptionsResolver implements SpecificationReso
         $resolver->define('type')
             ->required()
             ->allowedTypes('string')
-            ->allowedValues(
-                ContainerHelper::getSpecificationValidation(TypeValidation::class)->createIsValidCallable()
-            )->normalize(function (Options $options, $value) {
-                $value = str_replace('.', '', $value, $length);
-
-                return compact('value', 'length');
-            });
+            ->allowedValues(ContainerHelper::getValidation(TypeValidation::class)->createCallable())
+            ->normalize(ContainerHelper::getNormalizer(TypeNormalizer::class)->createCallable());
     }
 
     protected function defineLength(OptionsResolver $resolver): void
@@ -67,15 +63,8 @@ class SpecificationResolver extends OptionsResolver implements SpecificationReso
     {
         $resolver->define('encode')
             ->required()
-            ->allowedTypes('string[]')
-            ->allowedValues(
-                ContainerHelper::getSpecificationValidation(EncodeValidation::class)->createIsValidCallable()
-            )->normalize(function (Options $options, $encodes) {
-                return [
-                    'value' => $encodes[1] ?? $encodes[0],
-                    'length' => $encodes[0],
-                ];
-            });
+            ->allowedValues(ContainerHelper::getValidation(EncodeValidation::class)->createCallable())
+            ->normalize(ContainerHelper::getNormalizer(EncodeNormalizer::class)->createCallable());
     }
 
     protected function definePadding(OptionsResolver $resolver): void
@@ -92,8 +81,7 @@ class SpecificationResolver extends OptionsResolver implements SpecificationReso
 
                 $paddingResolver->define('position')
                     ->allowedValues(
-                        ContainerHelper::getSpecificationValidation(PaddingPositionValidation::class)
-                            ->createIsValidCallable()
+                        ContainerHelper::getValidation(PaddingPositionValidation::class)->createCallable()
                     )->default(Padding::DEFAULT_POSITION);
             });
     }

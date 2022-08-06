@@ -8,9 +8,10 @@ use LauanaOh\Iso8583\Contracts\EncoderContract;
 use LauanaOh\Iso8583\Contracts\FieldContract;
 use LauanaOh\Iso8583\Contracts\Iso8583MessageContract;
 use LauanaOh\Iso8583\Contracts\LengthContract;
+use LauanaOh\Iso8583\Contracts\NormalizerContract;
 use LauanaOh\Iso8583\Contracts\PaddingContract;
 use LauanaOh\Iso8583\Contracts\SpecificationContract;
-use LauanaOh\Iso8583\Contracts\SpecificationNormalizerContract;
+use LauanaOh\Iso8583\Contracts\SpecificationParserContract;
 use LauanaOh\Iso8583\Contracts\SpecificationResolverContract;
 use LauanaOh\Iso8583\Contracts\ValidationContract;
 use LauanaOh\Iso8583\Contracts\TagContract;
@@ -69,14 +70,19 @@ class ContainerHelper
         return iso8583_container(SpecificationResolverContract::class);
     }
 
-    public static function getSpecificationNormalizer(): SpecificationNormalizerContract
+    public static function getSpecificationParser(): SpecificationParserContract
     {
-        return iso8583_container(SpecificationNormalizerContract::class);
+        return iso8583_container(SpecificationParserContract::class);
     }
 
-    public static function getSpecificationValidation(string $validation): ValidationContract
+    public static function getValidation(string $validation): ValidationContract
     {
         return iso8583_container($validation);
+    }
+
+    public static function getNormalizer(string $normalizer): NormalizerContract
+    {
+        return iso8583_container($normalizer);
     }
 
     public static function getType(string $type): TypeContract

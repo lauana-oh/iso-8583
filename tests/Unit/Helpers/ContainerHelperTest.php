@@ -13,7 +13,7 @@ use LauanaOh\Iso8583\Exceptions\ContainerException;
 use LauanaOh\Iso8583\Helpers\ContainerHelper;
 use LauanaOh\Iso8583\Iso8583Message;
 use LauanaOh\Iso8583\Lengths\LLVAR;
-use LauanaOh\Iso8583\Support\SpecificationNormalizer;
+use LauanaOh\Iso8583\Support\SpecificationParser;
 use LauanaOh\Iso8583\Support\SpecificationResolver;
 use LauanaOh\Iso8583\Types\Numeric;
 use PHPUnit\Framework\TestCase;
@@ -89,7 +89,7 @@ class ContainerHelperTest extends TestCase
 
     public function testItCanGetSpecificationNormalizer()
     {
-        self::assertInstanceOf(SpecificationNormalizer::class, ContainerHelper::getSpecificationNormalizer());
+        self::assertInstanceOf(SpecificationParser::class, ContainerHelper::getSpecificationParser());
     }
 
     /**

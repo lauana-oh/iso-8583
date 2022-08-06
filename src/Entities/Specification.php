@@ -15,7 +15,7 @@ class Specification implements SpecificationContract
     public function loadSettings(array $settings): self
     {
         $this->settings = ContainerHelper::getSpecificationResolver()->resolveSettings(
-            ContainerHelper::getSpecificationNormalizer()->prepareSettings($settings)
+            ContainerHelper::getSpecificationParser()->prepareSettings($settings)
         );
 
         return $this;
