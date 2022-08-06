@@ -50,7 +50,7 @@ class SpecificationResolverTest extends TestCase
 
         self::assertEquals(['value' => 'n', 'length' => 0], $field['type']);
         self::assertEquals(4, $field['length']);
-        self::assertEquals(['value' => 'bcd', 'length' => 'bcd'], $field['encode']);
+        self::assertEquals(['value' => 'bcd', 'length' => 'bcd', 'tag' => 'bcd'], $field['encode']);
     }
 
     public function testItCanResolveFieldWithVariableLength()
@@ -62,19 +62,19 @@ class SpecificationResolverTest extends TestCase
 
         self::assertEquals(['value' => 'n', 'length' => 2], $field['type']);
         self::assertEquals(4, $field['length']);
-        self::assertEquals(['value' => 'bcd', 'length' => 'bcd'], $field['encode']);
+        self::assertEquals(['value' => 'bcd', 'length' => 'bcd', 'tag' => 'bcd'], $field['encode']);
     }
 
     public function testItCanResolveFieldWithVariableLengthAndDifferentEncode()
     {
         $this->settings['fields'][0]['type'] = 'n..';
-        $this->settings['fields'][0]['encode'] = ['bcd', 'ascii'];
+        $this->settings['fields'][0]['encode'] = ['bcd', 'ascii', 'ascii'];
 
         $field = $this->resolver->resolveSettings($this->settings)['fields'][0];
 
         self::assertEquals(['value' => 'n', 'length' => 2], $field['type']);
         self::assertEquals(4, $field['length']);
-        self::assertEquals(['value' => 'ascii', 'length' => 'bcd'], $field['encode']);
+        self::assertEquals(['value' => 'ascii', 'length' => 'bcd', 'tag' => 'ascii'], $field['encode']);
     }
 
     public function testItCanResolveFieldDefaultPadding()

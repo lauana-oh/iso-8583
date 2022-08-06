@@ -6,9 +6,12 @@ use Closure;
 use LauanaOh\Iso8583\Contracts\TagContract;
 use LauanaOh\Iso8583\Entities\ByteStream;
 use LauanaOh\Iso8583\Entities\DataHolder;
+use LauanaOh\Iso8583\Traits\HasEncoder;
 
 abstract class BaseTag implements TagContract
 {
+    use HasEncoder;
+
     protected string $value;
 
     public function setValue(string $value): self

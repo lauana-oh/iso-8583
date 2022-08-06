@@ -14,6 +14,7 @@ class EncodeNormalizer implements NormalizerContract
             return [
                 'value' => $encodes[1] ?? $encodes[0],
                 'length' => $encodes[0],
+                'tag' => $encodes[2] ?? $encodes[0],
             ];
         };
     }

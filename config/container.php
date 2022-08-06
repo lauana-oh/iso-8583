@@ -8,12 +8,13 @@
 | This container following the PSR-11 specification.
 */
 
+use LauanaOh\Iso8583\Builders\TagBeforeBuilder;
 use LauanaOh\Iso8583\Builders\DefaultFieldBuilder;
 use LauanaOh\Iso8583\Constants\Encode;
 use LauanaOh\Iso8583\Constants\Length;
 use LauanaOh\Iso8583\Constants\FieldType;
+use LauanaOh\Iso8583\Constants\Tag;
 use LauanaOh\Iso8583\Contracts\BitmapContract;
-use LauanaOh\Iso8583\Contracts\FieldBuilderContract;
 use LauanaOh\Iso8583\Contracts\FieldContract;
 use LauanaOh\Iso8583\Contracts\Iso8583MessageContract;
 use LauanaOh\Iso8583\Contracts\PaddingContract;
@@ -35,6 +36,7 @@ use LauanaOh\Iso8583\Normalizers\TypeNormalizer;
 use LauanaOh\Iso8583\Support\SpecificationParser;
 use LauanaOh\Iso8583\Support\SpecificationResolver;
 use LauanaOh\Iso8583\Tags\Invisible;
+use LauanaOh\Iso8583\Tags\Visible;
 use LauanaOh\Iso8583\Types\Alpha;
 use LauanaOh\Iso8583\Types\AlphaNumeric;
 use LauanaOh\Iso8583\Types\AlphaNumericSpecialCharacter;
@@ -62,7 +64,18 @@ $container[BitmapContract::class] = fn () => new Bitmap();
 $container[Iso8583MessageContract::class] = $container->factory(fn () => new Iso8583Message());
 $container[FieldContract::class] = $container->factory(fn () => new Field());
 $container[PaddingContract::class] = $container->factory(fn () => new Padding());
-$container[FieldBuilderContract::class] = fn () => new DefaultFieldBuilder();
+
+/*
+|--------------------------------------------------------------------------
+| Field builders bindings.
+|--------------------------------------------------------------------------
+|
+| This section set the bindings of field builders support natively to the
+| package.
+*/
+
+$container['builder_'.Tag::POSITION_NONE] = fn () => new DefaultFieldBuilder();
+$container['builder_'.Tag::POSITION_BEFORE] = fn () => new TagBeforeBuilder();
 
 /*
 |--------------------------------------------------------------------------
@@ -140,4 +153,5 @@ $container['length_'.strlen(Length::TYPE_LLLVAR)] = $container->factory(fn () =>
 | package.
 */
 
-$container['tag_invisible'] = $container->factory(fn () => new Invisible());
+$container['tag_'. Tag::TYPE_INVISIBLE] = $container->factory(fn () => new Invisible());
+$container['tag_'. Tag::TYPE_VISIBLE] = $container->factory(fn () => new Visible());

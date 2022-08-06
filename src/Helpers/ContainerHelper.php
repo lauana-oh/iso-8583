@@ -2,6 +2,7 @@
 
 namespace LauanaOh\Iso8583\Helpers;
 
+use LauanaOh\Iso8583\Constants\Tag;
 use LauanaOh\Iso8583\Contracts\BitmapContract;
 use LauanaOh\Iso8583\Contracts\CompoundTypeContract;
 use LauanaOh\Iso8583\Contracts\FieldBuilderContract;
@@ -43,7 +44,12 @@ class ContainerHelper
 
     public static function getDefaultFieldBuilder(): FieldBuilderContract
     {
-        return iso8583_container(FieldBuilderContract::class);
+        return self::getFieldBuilder(Tag::POSITION_NONE);
+    }
+
+    public static function getFieldBuilder(string $tagPosition): FieldBuilderContract
+    {
+        return iso8583_container('builder_'.$tagPosition);
     }
 
     public static function getBitmap(): BitmapContract

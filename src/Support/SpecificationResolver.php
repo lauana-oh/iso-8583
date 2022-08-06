@@ -2,6 +2,7 @@
 
 namespace LauanaOh\Iso8583\Support;
 
+use LauanaOh\Iso8583\Constants\Tag;
 use LauanaOh\Iso8583\Contracts\SpecificationResolverContract;
 use LauanaOh\Iso8583\Entities\Padding;
 use LauanaOh\Iso8583\Helpers\ContainerHelper;
@@ -95,6 +96,10 @@ class SpecificationResolver extends OptionsResolver implements SpecificationReso
             $compoundResolver->define('builder')
                 ->allowedValues(ContainerHelper::getValidation(BuilderValidation::class)->createCallable())
                 ->normalize(fn (Options $options, $value) => is_string($value) ? new $value() : $value);
+
+            $compoundResolver->define('tag')
+                ->allowedValues(...Tag::AVAILABLE_POSITIONS)
+                ->default(Tag::POSITION_NONE);
 
             $compoundResolver->define('fields')->default(function (OptionsResolver $fieldsResolver) {
                 $fieldsResolver->setPrototype(true);

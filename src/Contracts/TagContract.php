@@ -7,4 +7,6 @@ interface TagContract extends PipeContract
     public function setValue(string $value): self;
 
     public function getValue(): string;
+
+    public function setEncoder(EncoderContract $encoder): self;
 }

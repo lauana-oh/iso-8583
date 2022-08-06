@@ -2,7 +2,8 @@
 
 namespace Tests\Feature\Unpack;
 
-use LauanaOh\Iso8583\Builders\CompoundBuilder;
+use LauanaOh\Iso8583\Builders\FixedCompoundBuilder;
+use LauanaOh\Iso8583\Constants\Tag;
 use Tests\TestCase;
 
 class CompoundDecodeTest extends TestCase
@@ -22,7 +23,7 @@ class CompoundDecodeTest extends TestCase
                 'encode' => 'bcd, ascii',
                 'length' => 14,
                 'compound' => [
-                    'builder' => CompoundBuilder::class,
+                    'builder' => FixedCompoundBuilder::class,
                     'fields' => [
                         'totalSales' => [
                             'type' => 'n',
@@ -57,7 +58,7 @@ class CompoundDecodeTest extends TestCase
                 'encode' => 'bcd, ascii',
                 'length' => 99,
                 'compound' => [
-                    'builder' => CompoundBuilder::class,
+                    'builder' => FixedCompoundBuilder::class,
                     'fields' => [
                         'totalSales' => [
                             'type' => 'n..',
@@ -67,6 +68,42 @@ class CompoundDecodeTest extends TestCase
                         'totalSalesAmount' => [
                             'type' => 'n..',
                             'encode' => 'bcd, ascii',
+                            'length' => 12,
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        self::assertEquals($this->fieldsData, iso8583_decode($byteMessage, $specification));
+    }
+
+    public function testItCanDecodeADefinedTagValueCompoundMessage()
+    {
+        $byteMessage = '02007020000002000002164110760000000008000000000000006800000123303018434130323136303030303030313030303030';
+
+        $this->fieldsData[63] = [
+            'CA' => '02',
+            '16' => '000000100000',
+        ];
+
+        $specification['fields'] = [
+            63 => [
+                'type' => 'n..',
+                'encode' => 'bcd, ascii',
+                'length' => 99,
+                'compound' => [
+                    'builder' => FixedCompoundBuilder::class,
+                    'tag' => Tag::POSITION_BEFORE,
+                    'fields' => [
+                        'CA' => [
+                            'type' => 'n',
+                            'encode' => 'ascii',
+                            'length' => 2,
+                        ],
+                        '16' => [
+                            'type' => 'n',
+                            'encode' => 'ascii',
                             'length' => 12,
                         ],
                     ],
