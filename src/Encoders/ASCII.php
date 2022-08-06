@@ -21,4 +21,9 @@ class ASCII implements EncoderContract
     {
         return $length * 2;
     }
+
+    public function getSize(int $length): int
+    {
+        return $length / 2;
+    }
 }

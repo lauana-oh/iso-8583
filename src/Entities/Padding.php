@@ -12,6 +12,7 @@ class Padding implements PaddingContract
     protected string $padString = self::DEFAULT_PAD_STRING;
     protected int $position = self::DEFAULT_POSITION;
     protected int $size = 0;
+    protected bool $forced = false;
 
     public function pad(string $value): string
     {
@@ -54,5 +55,22 @@ class Padding implements PaddingContract
         $this->size = $size;
 
         return $this;
+    }
+
+    public function getSize(): int
+    {
+        return $this->size;
+    }
+
+    public function setForced(bool $forced): Padding
+    {
+        $this->forced = $forced;
+
+        return $this;
+    }
+
+    public function isForced(): bool
+    {
+        return $this->forced;
     }
 }

@@ -23,10 +23,10 @@ class Fixed extends BaseLength
 
     public function validate(DataHolder $data, ByteStream $message, Closure $next)
     {
-        $padding = $data->getField('padding');
-        $value = $padding->pad($data->getField('value'));
+        $value = $data->getField('value');
+        $valueSize = $data->getField('valueSize');
 
-        if (strlen($value) !== $this->size) {
+        if ($valueSize !== $this->size) {
             throw InvalidValueException::invalidFixedLength($value, $this->size);
         }
 

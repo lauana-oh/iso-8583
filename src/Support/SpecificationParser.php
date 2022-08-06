@@ -47,6 +47,10 @@ class SpecificationParser extends OptionsResolver implements SpecificationParser
                 $data['encode'] = array_map('trim', $encodes);
             }
 
+            if (isset($data['compound'])) {
+                $data['compound']['fields'] = $this->normalizeEncode($data['compound']['fields']);
+            }
+
             return $data;
         }, $value);
     }

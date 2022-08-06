@@ -12,4 +12,6 @@ class Types
     public const TYPE_NUMERIC = 'n';
     public const TYPE_NUMERIC_SPECIAL_CHAR = 'ns';
     public const TYPE_SPECIAL_CHAR = 's';
+
+    public const TYPE_COMPOUND_FIXED = 'fixed';
 }

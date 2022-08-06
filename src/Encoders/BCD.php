@@ -12,8 +12,8 @@ class BCD implements EncoderContract
     {
         $padding ??= ContainerHelper::getNewPadding();
 
-        if (strlen($data) % 2 !== 0) {
-            $padding->setSize(strlen($data) + 1);
+        if (!$padding->getSize() && strlen($data) % 2 !== 0) {
+            $padding->setForced(true)->setSize(strlen($data) + 1);
         }
 
         return $padding->pad($data);
@@ -29,5 +29,10 @@ class BCD implements EncoderContract
     public function getDigits(int $length): int
     {
         return $length % 2 === 0 ? $length : ++$length;
+    }
+
+    public function getSize(int $length): int
+    {
+        return $length;
     }
 }

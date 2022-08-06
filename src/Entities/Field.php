@@ -8,7 +8,6 @@ use LauanaOh\Iso8583\Contracts\PaddingContract;
 use LauanaOh\Iso8583\Contracts\PipeContract;
 use LauanaOh\Iso8583\Exceptions\DecodeException;
 use LauanaOh\Iso8583\Exceptions\EncodeException;
-use LauanaOh\Iso8583\Exceptions\InvalidValueException;
 use LauanaOh\Iso8583\Support\Pipeline;
 use Throwable;
 
@@ -26,16 +25,19 @@ class Field implements FieldContract
     public function pack(DataHolder $data, ByteStream $message, Closure $next)
     {
         try {
+            $value = $data->getField($this->key);
             $dataHolder = new DataHolder([
-                'value' => $data->getField($this->key),
+                'value' => $value,
                 'padding' => $this->padding,
             ]);
 
-            $message = Pipeline::send($dataHolder, $message)
-                ->through($this->components)
-                ->validate()
+            $fieldMessage = Pipeline::send($dataHolder, new ByteStream())
+                ->through(array_reverse($this->components))
                 ->pack()
+                ->validate()
                 ->andReturnMessage();
+
+            $message->concat($fieldMessage);
         } catch (Throwable $exception) {
             throw EncodeException::invalidField($this->type, $this->getKey(), $exception);
         }

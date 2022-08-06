@@ -13,8 +13,8 @@ class LLVAR extends BaseLength
 
     public function pack(DataHolder $data, ByteStream $message, Closure $next)
     {
-        $length = str_pad(strlen($data->getField('value')), static::LENGTH, '0', STR_PAD_LEFT);
-        $message->concat($this->encoder->encode($length));
+        $length = str_pad($data->getField('valueSize'), static::LENGTH, '0', STR_PAD_LEFT);
+        $message->prepend($this->encoder->encode($length));
 
         return $next($data, $message);
     }
@@ -28,10 +28,10 @@ class LLVAR extends BaseLength
 
     public function validate(DataHolder $data, ByteStream $message, Closure $next)
     {
-        $padding = $data->getField('padding');
-        $value = $padding->pad($data->getField('value'));
+        $value = $data->getField('value');
+        $valueSize = $data->getField('valueSize');
 
-        if (strlen($value) > $this->size) {
+        if ($valueSize > $this->size) {
             throw InvalidValueException::invalidVariableLength($value, $this->size);
         }
 

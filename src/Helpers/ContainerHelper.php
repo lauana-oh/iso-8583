@@ -3,6 +3,7 @@
 namespace LauanaOh\Iso8583\Helpers;
 
 use LauanaOh\Iso8583\Contracts\BitmapContract;
+use LauanaOh\Iso8583\Contracts\CompoundTypeContract;
 use LauanaOh\Iso8583\Contracts\FieldBuilderContract;
 use LauanaOh\Iso8583\Contracts\EncoderContract;
 use LauanaOh\Iso8583\Contracts\FieldContract;
@@ -88,6 +89,11 @@ class ContainerHelper
     public static function getType(string $type): TypeContract
     {
         return iso8583_container('type_'.$type);
+    }
+
+    public static function getCompoundType(string $type): CompoundTypeContract
+    {
+        return iso8583_container('type_compound_'.$type);
     }
 
     public static function getLength(string $length): LengthContract

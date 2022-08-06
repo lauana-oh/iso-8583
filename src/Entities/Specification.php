@@ -33,7 +33,7 @@ class Specification implements SpecificationContract
 
         $fieldSettings = $this->settings['fields'][$field];
 
-        return $this->getFieldBuilder()->createField($field, $fieldSettings);
+        return $this->getFieldBuilder($fieldSettings)->createField($field, $fieldSettings);
     }
 
     public function toArray(): array
@@ -41,8 +41,10 @@ class Specification implements SpecificationContract
         return $this->settings;
     }
 
-    protected function getFieldBuilder(): FieldBuilderContract
+    protected function getFieldBuilder(array $settings): FieldBuilderContract
     {
-        return ContainerHelper::getDefaultFieldBuilder();
+        return empty($settings['compound']['fields'])
+            ? ContainerHelper::getDefaultFieldBuilder()
+            : $settings['compound']['builder'];
     }
 }

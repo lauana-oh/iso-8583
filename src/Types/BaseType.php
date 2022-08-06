@@ -17,10 +17,17 @@ abstract class BaseType implements TypeContract
 
     public function pack(DataHolder $data, ByteStream $message, Closure $next)
     {
-        $message->concat($this->encoder->encode(
-            $data->getField('value'),
-            $data->getField('padding'),
-        ));
+        $value = $data->getField('value');
+        $padding = $data->getField('padding');
+        $encodedValue = $this->encoder->encode($value, $data->getField('padding'));
+
+        $valueSize = is_string($value) && $padding->isForced()
+            ? strlen($value)
+            : $this->encoder->getSize(strlen($encodedValue));
+
+        $data->setField('valueSize', $valueSize);
+
+        $message->concat($encodedValue);
 
         return $next($data, $message);
     }
@@ -36,6 +43,7 @@ abstract class BaseType implements TypeContract
         );
 
         $data->setField('value', $value);
+        $data->setField('valueSize', strlen($value));
 
         return $next($data, $message);
     }

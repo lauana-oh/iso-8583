@@ -40,9 +40,11 @@ use LauanaOh\Iso8583\Types\AlphaNumeric;
 use LauanaOh\Iso8583\Types\AlphaNumericSpecialCharacter;
 use LauanaOh\Iso8583\Types\AlphaSpecialCharacter;
 use LauanaOh\Iso8583\Types\Binary;
+use LauanaOh\Iso8583\Types\FixedCompound;
 use LauanaOh\Iso8583\Types\Numeric;
 use LauanaOh\Iso8583\Types\NumericSpecialCharacter;
 use LauanaOh\Iso8583\Types\SpecialCharacter;
+use LauanaOh\Iso8583\Validations\BuilderValidation;
 use LauanaOh\Iso8583\Validations\PaddingPositionValidation;
 use LauanaOh\Iso8583\Validations\EncodeValidation;
 use LauanaOh\Iso8583\Validations\TypeValidation;
@@ -79,6 +81,7 @@ $container[SpecificationParserContract::class] = fn () => new SpecificationParse
 $container[TypeValidation::class] = fn () => new TypeValidation();
 $container[EncodeValidation::class] = fn () => new EncodeValidation();
 $container[PaddingPositionValidation::class] = fn () => new PaddingPositionValidation();
+$container[BuilderValidation::class] = fn () => new BuilderValidation();
 
 $container[TypeNormalizer::class] = fn () => new TypeNormalizer();
 $container[EncodeNormalizer::class] = fn () => new EncodeNormalizer();
@@ -112,6 +115,8 @@ $container['type_'.Types::TYPE_BINARY] = $container->factory(fn () => new Binary
 $container['type_'.Types::TYPE_NUMERIC] = $container->factory(fn () => new Numeric());
 $container['type_'.Types::TYPE_NUMERIC_SPECIAL_CHAR] = $container->factory(fn () => new NumericSpecialCharacter());
 $container['type_'.Types::TYPE_SPECIAL_CHAR] = $container->factory(fn () => new SpecialCharacter());
+
+$container['type_compound_'. Types::TYPE_COMPOUND_FIXED] = $container->factory(fn () => new FixedCompound());
 
 /*
 |--------------------------------------------------------------------------

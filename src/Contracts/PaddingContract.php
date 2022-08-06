@@ -15,4 +15,10 @@ interface PaddingContract
     public function setPosition(?int $position): Padding;
 
     public function setSize(int $size = 0): Padding;
+
+    public function getSize(): int;
+
+    public function setForced(bool $forced): Padding;
+
+    public function isForced(): bool;
 }

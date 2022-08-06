@@ -8,8 +8,10 @@ use LauanaOh\Iso8583\Helpers\ContainerHelper;
 use LauanaOh\Iso8583\Normalizers\EncodeNormalizer;
 use LauanaOh\Iso8583\Normalizers\TypeNormalizer;
 use LauanaOh\Iso8583\Validations\PaddingPositionValidation;
+use LauanaOh\Iso8583\Validations\BuilderValidation;
 use LauanaOh\Iso8583\Validations\EncodeValidation;
 use LauanaOh\Iso8583\Validations\TypeValidation;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SpecificationResolver extends OptionsResolver implements SpecificationResolverContract
@@ -40,6 +42,7 @@ class SpecificationResolver extends OptionsResolver implements SpecificationReso
                 $this->defineLength($resolver);
                 $this->defineEncode($resolver);
                 $this->definePadding($resolver);
+                $this->defineCompound($resolver);
             });
     }
 
@@ -84,5 +87,23 @@ class SpecificationResolver extends OptionsResolver implements SpecificationReso
                         ContainerHelper::getValidation(PaddingPositionValidation::class)->createCallable()
                     )->default(Padding::DEFAULT_POSITION);
             });
+    }
+
+    protected function defineCompound(OptionsResolver $resolver)
+    {
+        $resolver->define('compound')->default(function (OptionsResolver $compoundResolver) {
+            $compoundResolver->define('builder')
+                ->allowedValues(ContainerHelper::getValidation(BuilderValidation::class)->createCallable())
+                ->normalize(fn (Options $options, $value) => is_string($value) ? new $value() : $value);
+
+            $compoundResolver->define('fields')->default(function (OptionsResolver $fieldsResolver) {
+                $fieldsResolver->setPrototype(true);
+
+                $this->defineType($fieldsResolver);
+                $this->defineEncode($fieldsResolver);
+                $this->defineLength($fieldsResolver);
+                $this->definePadding($fieldsResolver);
+            });
+        });
     }
 }
